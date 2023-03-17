@@ -1,0 +1,9 @@
+note:
+
+
+train.json and test.json are the correct training and testing sets as json (ground truth). 
+
+
+The pred-* files are the predicted samples from each of the models, given the data back in their own schema.
+
+The test-* files are the CORRECT answers (i.e., the same data contained in test.json) but in their own schema.
