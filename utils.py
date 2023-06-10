@@ -1,6 +1,6 @@
 import json
 import openai
-openai.api_key = "sk-OEfQo6UiSAoqkv1p79Rep4eI946OO9EP2q2oY0wS"
+openai.api_key = "<YOUR_API_KEY>"
 
 
 def load_annotation(annotation_string, stop_sequence="\n\nEND\n\n"):
