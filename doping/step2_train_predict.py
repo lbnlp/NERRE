@@ -1,6 +1,15 @@
+"""
+Script for:
+
+- formatting LLM-NERRE JSONL training files in different schemas for doping
+- training a GPT-3 model with fine-tuning
+- using trained models to infer on new data (e.g., for performance evaluation).
+
+Use --help with this script for more information on usage.
+"""
+
 import copy
 import os
-import random
 import time
 import sys
 import traceback
@@ -16,7 +25,7 @@ import warnings
 import datetime
 
 from constants import DATADIR
-from util import read_jsonl, dump_jsonl
+from util import dump_jsonl
 from step1_annotate import preprocess_text, sentence_is_paradigm
 
 
@@ -37,8 +46,26 @@ def gpt3_completion_from_sentence_json(
         fmt="eng"
 ):
     """
-    fmt: The format to create a completion in. The format may be either "eng" for natural language like, or
-        "json", for formatted json sring literal.=
+    Create an LLM completion (target) from a sentence json according to different schemas.
+    Used for training.
+
+    Args:
+        sentence_json (dict): A dictionary for a sentence with "sentence_text" field and other keys
+            relevant for doping (basemats, dopants, doping_modifierts, dopants2basemats, results.
+        write_links (bool): Whether to write the links between dopants and basemats.
+        write_nonlinked_basemats (bool): Whether to write "isolated" basemats.
+        write_nonlinked_dopants (bool): whether to write "isolated" dopants
+        write_results (bool): Whether to write the results.
+        write_modifiers (bool): Whether to write the doping modifiers.
+        stop_token (str): The stop token to use.
+        whitespace (str): The whitespace to use.
+        fmt (str): The format to create a completion in. Note this does not mean the schema, but only
+            whether the completion should be written as english sentences or as stringified JSON. Should
+            be either "json" or "eng"; to use EngExtra as in the publication, use write_results=True and
+            write_modifiers=True.
+
+    Returns:
+        str: The GPT-3 completion to be used for training.
 
     """
     if fmt not in ("eng", "json"):
@@ -97,9 +124,18 @@ def gpt3_completion_from_sentence_json(
     return output
 
 
-def sentence_entities_from_gpt3_completion(text, fmt="eng"):
+def decode_entities_from_llm_completion(text, fmt="eng"):
     """
-    fmt (str): The format to decode from, either "eng" or "json"
+    Obtain entities as a dictionary (to be converted to json) from a GPT-3 completion
+    string. Used for decoding LLM string replies to structured doping data.
+
+    Args:
+        text (str): The LLM completion string.
+        fmt (str): The format to decode from, either "eng" or "json". Extra entities
+            are automatically decoded if present.
+
+    Returns:
+        (dict): The structured doping entities representing a graph (JSON document).
     """
     if fmt not in ("eng", "json"):
         raise ValueError(f"Value of fmt='{fmt}' not valid!")
@@ -251,12 +287,25 @@ def sentence_entities_from_gpt3_completion(text, fmt="eng"):
     return ents
 
 
-def gpt3_prompt_from_sentence_json(
+def llm_prompt_from_sentence_json(
         sentence_json,
         include_relevance_hint=False,
         include_question=True,
         start_token=START_TOKEN,
 ):
+    """
+    Create an LLM prompt from a sentence's json representation.
+
+    Args:
+        sentence_json (dict): The JSON dict representation of the sentence.
+        include_relevance_hint (bool): Whether to include a hint about the relevance of the sentence.
+            Not used in publication, and in practice, does not actually affect performance.
+        include_question (bool): Whether to include a question about the sentence (i.e., an instruction).
+        start_token (str): The start token to use.
+
+    Returns:
+        str: The prompt for the LLM.
+    """
     text = sentence_json["sentence_text"]
     relevant = sentence_json["relevant"]
 
@@ -276,7 +325,7 @@ def gpt3_prompt_from_sentence_json(
 
 def create_jsonl(
         abstracts_raw_data,
-        output_filename=None,
+        output_filename,
         include_irrelevant=False,
         dry_run=False,
         prompt_kwargs={},
@@ -284,7 +333,22 @@ def create_jsonl(
         fmt="eng"
 ):
     """
+    Create a JSONL file from a list of abstracts (annotated or LLM-completed).
+    Used for training of the LLM.
+
     Dry run means it will the prompts and completions to the console and not write them to file.
+
+
+    Args:
+        abstracts_raw_data ([dict]): List of documents to create the JSONL from.
+        output_filename (str): The filename to write the JSONL to.
+        include_irrelevant (bool): Whether to include irrelevant sentences.
+        dry_run (bool): Whether to do a dry run (i.e., not write to file).
+        prompt_kwargs (dict): Keyword arguments to pass to llm_prompt_from_sentence_json.
+        completion_kwargs (dict): Keyword arguments to pass to gpt3_completion_from_sentence_json.
+
+    Returns:
+        None
 
     """
     completions = []
@@ -298,7 +362,7 @@ def create_jsonl(
                     print("SKIPPED FOR RELEVANCE", s["sentence_text"])
                 continue
 
-            prompt = gpt3_prompt_from_sentence_json(s, **prompt_kwargs)
+            prompt = llm_prompt_from_sentence_json(s, **prompt_kwargs)
             completion = gpt3_completion_from_sentence_json(s, fmt=fmt, **completion_kwargs)
 
             if dry_run:
@@ -331,7 +395,14 @@ def create_jsonl(
 
 def create_sentences_json_for_inference(entry):
     """
-    must have abstract, doi, and title fields
+    Prepare an entry for prediction with an LLM.
+    Entry must have abstract, doi, and title fields.
+
+    Args:
+        entry (dict): The entry to prepare.
+
+    Returns:
+        (dict): The updated, preprocessed entry.
     """
     title = entry["title"]
     doi = entry["doi"]
@@ -349,8 +420,13 @@ def create_sentences_json_for_inference(entry):
 
 
 # Major core functions
-
-def gpt3_finetune(data_training, training_filename, fmt="eng", write_extras=False, n_epochs=7):
+def gpt3_finetune(
+        data_training,
+        training_filename,
+        fmt="eng",
+        write_extras=False,
+        n_epochs=7
+):
     """
     Fine tune a doping model using data from the annotation script.
 
@@ -360,6 +436,10 @@ def gpt3_finetune(data_training, training_filename, fmt="eng", write_extras=Fals
         data_training (list): The training data, in the annotation script heirarchical format.
         training_filename (str): the name of the file you want to save
             the jsonl training tuples to. E.g., "my_GPT3_training_file_version1.jsonl".
+        fmt (str): Either "json" or "eng". Note to use ExtraEng use "eng" with write_extras=True.
+        write_extras (bool): Whether to write extras' information (results, modifiers) to the
+            training file.
+        n_epochs (int): The number of epochs to use for training.
 
     Returns:
         data_training_dois ([str]): The list of dois included here for training.
@@ -421,9 +501,7 @@ def gpt3_infer(
             will halt.
 
     Returns:
-        dois_skipped ([str]): List of dois that were skipped bc. they were
-            already in the training_data.
-        fname ([str}): The output filename where formatted samples were written.
+        None
     """
     print(f"Loaded {len(data_inference)} samples for inference.")
     print(f"Using {model} for prediction")
@@ -443,7 +521,7 @@ def gpt3_infer(
 
             if sentence_is_paradigm(text, cems):
                 s_json["relevant"] = True
-                prompt = gpt3_prompt_from_sentence_json(
+                prompt = llm_prompt_from_sentence_json(
                     s_json,
                     include_relevance_hint=False,
                     include_question=True
@@ -511,30 +589,27 @@ def gpt3_infer(
     print(f"Dumped {len(gpt3_predictions)} total to {output_filename} (and raw jsonl to {jsonl_filename}).")
 
 
-def gpt3_decode(inferred_filename, output_filename=None, fmt="eng"):
+def gpt3_decode(inferred_filename, output_filename, fmt="eng"):
     """
     Decode and coalesce GPT-3 completions to structured graphs.
 
     Simply adds an "entity_graph_raw" key to each sample using the
     "doping_sentences" as input.
 
-
     Args:
         inferred_filename (str): The filename holding the GPT-3 inferences, generated
             by gpt3_infer.
         output_filename (str): The filename to write structured graphs to.
+        fmt (str): The format to use (eng or json).
     """
-
     inferred_samples = loadfn(inferred_filename)
 
     for abstract_json in tqdm.tqdm(inferred_samples):
         for sentence_json in abstract_json["doping_sentences"]:
-            ents = sentence_entities_from_gpt3_completion(sentence_json["gpt3_completion"], fmt=fmt)
+            ents = decode_entities_from_llm_completion(sentence_json["gpt3_completion"], fmt=fmt)
             sentence_json["entity_graph_raw"] = ents
 
-    dt = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     n_decoded = len(inferred_samples)
-    output_filename = output_filename if output_filename else f"{BASEDIR}GPT3_decoded_file_{n_decoded}_samples_at_{dt}.json"
     dumpfn(inferred_samples, output_filename)
 
     print(f"Decoded {n_decoded} samples to file {output_filename}")
@@ -695,52 +770,3 @@ if __name__ == "__main__":
         )
     else:
         raise ValueError(f"Op type {op_type} unknown; choose from train or predict.")
-
-
-
-
-    # # data_training = loadfn("/Users/ardunn/alex/lbl/projects/matscholar/ardunn_text_experiments/doping_gpt3/gpt3_per_sentence/data/dopingv7_MERGED_162abstracts_1297sents_413relevant_incl_adversarial.json")
-    #
-    #
-    #
-    # # model = "davinci:ft-matscholar-2022-04-11-01-50-38"
-    # # model = "davinci:ft-matscholar-2022-06-24-07-12-39"
-    #
-    # # not results/modifiers, model was used for large extraction
-    # # model = "davinci:ft-matscholar-2022-08-30-05-13-11"
-    #
-    # # includes result entities
-    # # model = "davinci:ft-matscholar-2022-08-30-05-32-29"
-    #
-    # # json version
-    # model = "davinci:ft-matscholar-2022-10-03-02-04-26"
-    #
-    #
-    # # all_relevant_data = loadfn(f"{BASEDIR}../../doping_357k_dumbrelevant.json")
-    # # samples_to_infer = random.sample(all_relevant_data, k=100)
-    # samples_to_infer = loadfn(f"{BASEDIR}dopingv7_VALIDATION.json")
-    # samples_to_infer = [{k: d[k] for k in ("title", "text", "doi")} for d in samples_to_infer]
-    #
-    # dois_skipped, inferred_filename = gpt3_infer(
-    #     data_inference=samples_to_infer,
-    #     data_training_dois=[],
-    #     model=model,
-    #     save_every_n=50,
-    #     halt_on_error=True
-    # )
-    #
-    # # inferred_filename = f"{BASEDIR}GPT3_inference_file_357446_samples_at_2022-09-09_18-53-28.json"
-    # # output_filename = gpt3_decode(inferred_filename=inferred_filename)
-    #
-    #
-    #
-    # # inferred_filename = f"{BASEDIR}GPT3_inference_file_48438_samples.json"
-    # output_filename = gpt3_decode(inferred_filename=inferred_filename,
-    #                               # fmt="json"
-    #                               )
-
-
-
-
-
-
