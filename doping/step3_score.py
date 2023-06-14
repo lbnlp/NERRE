@@ -10,8 +10,11 @@ from monty.serialization import loadfn
 import pprint
 import seaborn as sns
 import matplotlib.pyplot as plt
+import jellyfish
+import numpy as np
 
 from constants import DATADIR
+from step2_train_predict import llm_completion_from_sentence_json
 
 EVALUATE_MODIFIERS_AND_RESULTS = False
 
@@ -25,7 +28,11 @@ def evaluate(gold, test, loud=False):
         loud (bool): whether to print out the results of each sentence
 
     Returns:
-        (dict, [str]): dictionary of scores and list of entities used in the evaluation
+        scores_computed (dict): dictionary of scores by entity
+        ent_categories ([str]): and list of entities used in the evaluation
+        sequences_distances ([float]): The jaro winkler distances for each completion from raw string
+        sequences_total (int): The total number of sequences evaluated for sequence accuracy
+        sequences_correct (int): The total number of sequences exactly correct.
     """
     if EVALUATE_MODIFIERS_AND_RESULTS:
         ent_categories = ["basemats", "dopants", "results", "doping_modifiers"]
@@ -37,6 +44,10 @@ def evaluate(gold, test, loud=False):
     }
 
     scores["dopants2basemats"] = {"n_correct": 0, "test_retrieved": 0, "gold_retrieved": 0}
+
+    sequences_correct = 0
+    sequences_total = 0
+    sequences_distances = []
 
     for i, val_entry in enumerate(gold):
         for j, s in enumerate(val_entry["doping_sentences"]):
@@ -125,6 +136,22 @@ def evaluate(gold, test, loud=False):
             scores["dopants2basemats"]["n_correct"] += n_correct_triplets
             scores["dopants2basemats"]["test_retrieved"] += len(test_triplets)
             scores["dopants2basemats"]["gold_retrieved"] += len(gold_triplets)
+
+            # Jaro winkler sequence accuracies
+            test_completion = test[i]["doping_sentences"][j]["gpt3_completion"]
+            gold_completion = s["completion"]
+            dist = jellyfish.jaro_winkler_similarity(gold_completion, test_completion)
+            sequences_distances.append(dist)
+            sequences_total += 1
+
+            if test_completion == gold_completion:
+                print("Sequences are identical")
+                sequences_correct += 1
+            elif loud:
+                print("Sequences difer:")
+                print(test_completion)
+                print(gold_completion)
+
             if loud:
                 print("-"*50 + "\n")
     if loud:
@@ -168,12 +195,18 @@ def evaluate(gold, test, loud=False):
     print(f"triplets: prec={triplet_prec}, recall={triplet_recall}, f1={triplet_f1}")
     scores_computed["link triplets"] = {"precision": triplet_prec, "recall": triplet_recall, "f1": triplet_f1}
 
-    return scores_computed, ent_categories
+    return scores_computed, ent_categories, sequences_distances, sequences_correct, sequences_total
 
 
 if __name__ == "__main__":
 
     p = argparse.ArgumentParser(fromfile_prefix_chars='@')
+
+    p.add_argument(
+        "schema_type",
+        choices=["eng", "engextra", "json"],
+        help="The schema to use for similarity scores.",
+    )
 
     p.add_argument(
         '--test_file',
@@ -207,10 +240,27 @@ if __name__ == "__main__":
     test = loadfn(args.pred_file)
     plot = args.plot
     loud = args.loud
+    schema_type = args.schema_type
+
+    kwargs = {"write_results": False, "write_modifiers": False}
+    if schema_type == "eng":
+        fmt = "eng"
+
+    elif schema_type == "engextra":
+        fmt = "eng"
+        kwargs = {"write_results": True, "write_modifiers": True}
+    else:
+        fmt = "json"
+
+
+    for gj in gold:
+        for sjson in gj["doping_sentences"]:
+            c = llm_completion_from_sentence_json(sjson, stop_token="", fmt=fmt, **kwargs)
+            sjson["completion"] = c
 
     print(f"Scoring outputs using \n\ttest file: {args.test_file}\n\tpred file: {args.pred_file}")
 
-    scores_computed, ent_categories = evaluate(gold, test, loud=loud)
+    scores_computed, ent_categories, sequences_distances, sequences_correct, sequences_total = evaluate(gold, test, loud=loud)
     # FOR PLOTTING ONLY
 
     ents_rows = []
@@ -230,6 +280,8 @@ if __name__ == "__main__":
     df["score"] = scores_df
 
     print(df)
+    print("Avg sequence similarity: ", np.mean(sequences_distances))
+    print("Frac. of sequences exactly correct: ", sequences_correct/sequences_total)
 
     if plot:
         ax = sns.barplot(x="entity", y="score", hue="metric", data=df)

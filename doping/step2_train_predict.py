@@ -34,7 +34,7 @@ UNKNOWN_STR = "unknown"
 STOP_TOKEN = "\nEND"
 WHITESPACE = " "
 
-def gpt3_completion_from_sentence_json(
+def llm_completion_from_sentence_json(
         sentence_json,
         write_links=True,
         write_nonlinked_basemats=True,
@@ -345,7 +345,7 @@ def create_jsonl(
         include_irrelevant (bool): Whether to include irrelevant sentences.
         dry_run (bool): Whether to do a dry run (i.e., not write to file).
         prompt_kwargs (dict): Keyword arguments to pass to llm_prompt_from_sentence_json.
-        completion_kwargs (dict): Keyword arguments to pass to gpt3_completion_from_sentence_json.
+        completion_kwargs (dict): Keyword arguments to pass to llm_completion_from_sentence_json.
 
     Returns:
         None
@@ -363,7 +363,7 @@ def create_jsonl(
                 continue
 
             prompt = llm_prompt_from_sentence_json(s, **prompt_kwargs)
-            completion = gpt3_completion_from_sentence_json(s, fmt=fmt, **completion_kwargs)
+            completion = llm_completion_from_sentence_json(s, fmt=fmt, **completion_kwargs)
 
             if dry_run:
                 print(abstract_extracted["doi"])
@@ -469,8 +469,6 @@ def gpt3_finetune(
     )
     print(f"JSONL written to {training_filename}.")
 
-    # print("calling openai api and syncing with wandb")
-    # os.system("openai wandb sync")
     os.system(f"openai api fine_tunes.create -t '{training_filename}' -m 'davinci' --n_epochs={n_epochs}")
 
     print(f"Model fine-tuning is in progress. Raw training JSONL data stored at {training_filename}.")
