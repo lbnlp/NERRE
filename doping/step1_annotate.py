@@ -43,7 +43,12 @@ ELEMENTS = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg',
             'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn', 'Nh', 'Fl', 'Mc',
             'Lv', 'Ts', 'Og', 'Uue']
 
-def wrap_input(prompt, null_possible=False, multi_and_null=False):
+
+def wrap_input(
+        prompt,
+        null_possible=False,
+        multi_and_null=False
+):
     """
     Wrap the input for an entry from <input>. Note "prompt" here does
     not correspond to anything relevant to LLMs, it is just a command
