@@ -1,18 +1,32 @@
+"""
+Script for scoring predicted doping entries in according to several
+potential schemas presented in the publication.
+"""
 import os
+import argparse
 
 import pandas as pd
 from monty.serialization import loadfn
 import pprint
-import random
 import seaborn as sns
 import matplotlib.pyplot as plt
-import argparse
 
 from constants import DATADIR
 
 EVALUATE_MODIFIERS_AND_RESULTS = False
 
 def evaluate(gold, test, loud=False):
+    """
+    Evaluate the performance of the model on the test set.
+
+    Args:
+        gold (list): list of dictionaries containing the gold standard annotations
+        test (list): list of dictionaries containing the model's predictions (in same format)
+        loud (bool): whether to print out the results of each sentence
+
+    Returns:
+        (dict, [str]): dictionary of scores and list of entities used in the evaluation
+    """
     if EVALUATE_MODIFIERS_AND_RESULTS:
         ent_categories = ["basemats", "dopants", "results", "doping_modifiers"]
     else:
@@ -111,13 +125,8 @@ def evaluate(gold, test, loud=False):
             scores["dopants2basemats"]["n_correct"] += n_correct_triplets
             scores["dopants2basemats"]["test_retrieved"] += len(test_triplets)
             scores["dopants2basemats"]["gold_retrieved"] += len(gold_triplets)
-
-            # Precision = Number of correct triples/Number of triples retrieved
-            # Recall = Number of correct triples/Number of correct triples that exist in Gold set.
-            # F-Measure = Harmonic mean of Precision and Recall.
             if loud:
                 print("-"*50 + "\n")
-
     if loud:
         pprint.pprint(scores)
 
@@ -141,6 +150,9 @@ def evaluate(gold, test, loud=False):
         scores_computed[k]["recall"] = recall
         scores_computed[k]["f1"] = f1
 
+    # Precision = Number of correct triples/Number of triples retrieved
+    # Recall = Number of correct triples/Number of correct triples that exist in Gold set.
+    # F-Measure = Harmonic mean of Precision and Recall.
 
     triplet_scores = scores["dopants2basemats"]
     if triplet_scores["test_retrieved"] == 0:
