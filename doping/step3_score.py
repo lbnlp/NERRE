@@ -24,7 +24,6 @@ def evaluate(gold, test, loud=False):
 
     scores["dopants2basemats"] = {"n_correct": 0, "test_retrieved": 0, "gold_retrieved": 0}
 
-
     for i, val_entry in enumerate(gold):
         for j, s in enumerate(val_entry["doping_sentences"]):
             if not s["relevant"]:

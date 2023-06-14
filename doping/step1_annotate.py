@@ -1,3 +1,10 @@
+"""
+This is a script for annotating data relevant to doping.
+The doping data is annotated on a sentence-by-sentence basis.
+It is a command line utility meant to be used interactively through the command line.
+See the --help for this script for more help.
+"""
+
 import os
 import json
 import pprint
@@ -37,6 +44,19 @@ ELEMENTS = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg',
             'Lv', 'Ts', 'Og', 'Uue']
 
 def wrap_input(prompt, null_possible=False, multi_and_null=False):
+    """
+    Wrap the input for an entry from <input>. Note "prompt" here does
+    not correspond to anything relevant to LLMs, it is just a command
+    line utility.
+
+    Args:
+        prompt (str): The prompt to display to the user.
+        null_possible (bool): Whether or not the user can enter "null" as an input.
+        multi_and_null (bool): Whether or not the user can enter multiple inputs
+
+    Returns:
+        (str) The updated prompt
+    """
     if null_possible:
         prompt = f"{prompt} {NULL_SUFFIX}"
     elif multi_and_null:
@@ -51,6 +71,17 @@ def wrap_input(prompt, null_possible=False, multi_and_null=False):
 
 
 def yn_input(prompt):
+    """
+    A wrapper for yes/no input for <input>.
+    Note prompt here does not correspond to anything relevant to LLMs, it is just a command
+    line utility.
+
+    Args:
+        prompt (str): The prompt to display to the user.
+
+    Returns:
+        (bool) True if the user entered "y", False if the user entered "n".
+    """
     satisfied = False
     output = None
 
@@ -74,15 +105,45 @@ def yn_input(prompt):
 
 
 def colored(r, g, b, text):
+    """
+    Color text for ease of annotating.
+
+    Args:
+        r (int): Red value.
+        g (int): Green value.
+        b (int): Blue value.
+        text (str): Text to color.
+
+    Returns:
+        (str) The colored text.
+    """
     return "\033[38;2;{};{};{}m{}\033[38;2;255;255;255m".format(r, g, b, text)
 
 
 def wrap_input_multi(prompt):
+    """
+    Wrap multiple inputs.
+
+    Args:
+        prompt (str): The prompt to display to the user.
+
+    Returns:
+        (list) The list of inputs.
+    """
     wrapped = wrap_input(prompt, multi_and_null=True)
     return [item for item in wrapped.split(MULTI_DELIMITER) if item]
 
 
 def preprocess_text(text):
+    """
+    Preprocess a string to be presented to the user.
+
+    Args:
+        text (str): The text to preprocess.
+
+    Returns:
+        (str, list) The preprocessed text, and the list of chemical entities.
+    """
     for tok in ("<inf>", "</inf>", "<sup>", "</sup>", "<hi>", "</hi>", "<sub>", "</sub", "$$", "\hbox", "\emph", "\\bf"):
         text = text.replace(tok, "")
 
@@ -99,7 +160,17 @@ def preprocess_text(text):
 
 def sentence_is_paradigm(sentence, cems):
     """
-    Returns true if the sentence definitely has to do with doping.
+    Returns true if the sentence probably has to do with doping.
+
+    Used as a basic relevance screener to avoid inferring on
+    sentences which do not have to do with doping.
+
+    Args:
+        sentence (str): The sentence to check.
+        cems (list): The chemical entities (as per CDE) in the sentence.
+
+    Returns: (bool)
+
     """
     # Paradigm: has a directly doping related word
     if any([paradigm in sentence.lower() for paradigm in (" dop", "-dop", "n-type", "p-type", "codop")]):
@@ -125,6 +196,17 @@ def sentence_is_paradigm(sentence, cems):
 
 
 def annotate_paradigm(s, cems, entry):
+    """
+    Annotate a single sentence.
+
+    Args:
+        s (str): The sentence to annotate.
+        cems ([str]): A list of chemical entities from CDE
+        entry (dict): The entry to annotate.
+
+    Returns:
+        (dict, bool) The updated entry, and whether or not the entry was accepted by user.
+    """
     print("Sentence contains possible doping information.")
     s_pretty = s.replace("dop", colored(255, 0, 0, "dop")).replace(":", colored(255, 0, 0, ":"))
 
@@ -175,11 +257,20 @@ def annotate_paradigm(s, cems, entry):
 
 def annotate_doping_basic(doc):
     """
+
+    Do a basic annotation of an abstract (or document)/
+
     Doc must have the following fields:
 
     - 'abstract'
     - 'doi'
     - 'title'
+
+    Args:
+        doc (dict): The document to annotate. Must have abstract, doi, and title fields.
+
+    Returns:
+        extracted (dict): The extracted information, annotated on a sentence-by-sentence basis.
 
     """
 
