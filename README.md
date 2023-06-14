@@ -1,16 +1,11 @@
-## Preparing train/val splits:
-You can split the data into train/val splits using the following code and then run them through the GPT-3 API with:
-```
-python prepare_test_train_data.py --dataset_path "data/general_materials_information_annotations.jsonl" --experiment_dir <experiment_dir>
-bash eval.sh <experiment_dir>
-```
+# LLM-NERRE code
 
-## Results directories
-For your convenience, we have included the output of the fine-tuned model for each of the 5 validation sets in the following directories:
-* `data/general_results`
-* `data/mof_results`
+For the publication "*Structured information extraction from scientific text with large language models*" in Nature Communications by John Dagdelen*, Alexander Dunn*, Nicholas Walker, Sanghoon Lee, Andrew S. Rosen, Gerbrand Ceder, Kristin Persson, and Anubhav Jain.
 
-The `gpt3_completion` values are what the model output and the `completion` values are the human annotations.
 
-## Manually evaluated examples:
-We manually evaluated 50 validation set examples from experiments_general/fold_0/val.jsonl at random. These examples can be found in `data/general_manual_evaluation_set.jsonl`.
+###### * = Equal contribution
+
+
+**JSON models**: For code reproducing the General-JSON and MOF-JSON models, see the `general_and_mofs` subdirectory.
+
+**Doping models**: For code reproducing the doping models, see the `doping` subdirectory.
