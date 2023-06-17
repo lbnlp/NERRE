@@ -18,6 +18,8 @@ For the publication "*Structured information extraction from scientific text wit
 
 Software requirements for specific python packages are given as `requirements.txt` files in each subdirectory (with required versions specified).
 
+### Annotation UI
+![Annotation UI Colab](https://colab.research.google.com/drive/17X1fv6uiH4z1J8lg15L6aHXZED1l5FBr?usp=sharing)
 
 ### Installing and running the code
 
