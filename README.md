@@ -23,7 +23,7 @@ Software requirements for specific python packages are given as `requirements.tx
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-### Installing and running the code
+### Installing and running the evaluation code
 
 Specific instructions for each task are given in the subdirectories in the `readme.md` files. Running the scripts is done either through the command line (`python <script_name.py> [options]`) or through Jupyter notebook. Running the scripts does not require installation, but does require the packages in the `requirements.txt` files.
 
