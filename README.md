@@ -6,9 +6,14 @@ For the publication "*Structured information extraction from scientific text wit
 ###### * = Equal contribution
 
 
-**JSON models**: For code reproducing the General-JSON and MOF-JSON models, see the `general_and_mofs` subdirectory.
+**General/MOF JSON models**: 
+ - For code reproducing the General-JSON and MOF-JSON models, see the `general_and_mofs` subdirectory.
+ - Includes the annotation UI (including optional in-the-loop annotation if you have your own GPT-3 fine tune) for annotating new datasets!
 
-**Doping models**: For code reproducing the doping models, see the `doping` subdirectory.
+
+**Doping models**: 
+- For code reproducing the doping models, see the `doping` subdirectory.
+- Includes annotation CLI for annotating new doping examples from your own data.
 
 
 ### Software requirements
@@ -17,11 +22,6 @@ For the publication "*Structured information extraction from scientific text wit
 - Software has been run on Python 3.7.3 on MacOS Ventura 13.4.
 
 Software requirements for specific python packages are given as `requirements.txt` files in each subdirectory (with required versions specified).
-
-### Annotation UI
-<a target="_blank" href="https://colab.research.google.com/drive/17X1fv6uiH4z1J8lg15L6aHXZED1l5FBr?usp=sharing">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
 
 ### Installing and running the evaluation code
 

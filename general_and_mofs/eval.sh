@@ -1,6 +1,5 @@
 #!/bin/bash
 
-conda activate gpt3
 # Set the experiments dir
 EXPERIMENTS_DIR=$1
 

@@ -1,6 +1,8 @@
 # Doping NERRE
 
-Annotating, training, and evaluating the LLM-NERRE doping experiments requires a bit more code as entries are broken down on a sentence-by-sentence basis. This directory contains code for annotation, training with GPT-3, and evaluating on the test set. You may also use these scripts to run full-scale inference experiments with your own models. **Note: The models used in the publication require private API access and therefore cannot be called; you can, however, train your own model (~$5 with the data provided here) and obtain similar results to those shown in the paper.** Inputs and outputs used in the paper are provided for all intermediate steps such that each step can otherwise be reproduced without access to the model. 
+Annotating, training, and evaluating the LLM-NERRE doping experiments requires a bit more code as entries are broken down on a sentence-by-sentence basis. This directory contains code for annotation, training with GPT-3, and evaluating on the test set. You may also use these scripts to run full-scale inference experiments with your own models. **Note: The models used in the publication require private API access and therefore cannot be called; you can, however, train your own model (~$5 with the data provided here) and obtain similar results to those shown in the paper.** Inputs and outputs used in the paper are provided for all intermediate steps such that each step can otherwise be reproduced without access to the model.
+
+*You should not use the annotation UI for the doping task, you should use the annotation script below.*
 
 
 There are 3 scripts:
@@ -116,7 +118,7 @@ triplets: prec=0.7966101694915254, recall=0.8103448275862069, f1=0.8034188034188
 6  precision  link triplets  0.796610
 7     recall  link triplets  0.810345
 8         f1  link triplets  0.803419
-Avg sequence distance:  0.9766977321626334
+Avg sequence similarity:  0.9766977321626334
 Frac. of sequences exactly correct:  0.6666666666666666
 ```
 

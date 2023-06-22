@@ -21,38 +21,6 @@ def read_jsonl(filename, num_samples=None):
             return random.sample(samples, num_samples)
         return samples
 
-
-def make_html_doc():
-    html_doc = """"""
-    for i in range(5):
-        results = read_jsonl(os.path.join("results", f"run_{i}.jsonl"))
-        for r in results:
-            r['completion'] = load_annotation(r['completion'])
-            try:
-                r['gpt3_completion'] = load_annotation(r['gpt3_completion'])
-            except:
-                continue
-            # Add prompt to html doc
-            html_doc += f"""<h4>{r['prompt']}</h4>"""
-            # Add completions to html doc as table
-            try:
-                gcomp = json.dumps(r['gpt3_completion'], indent=2).replace("\u2212", "-")
-            except:
-                comp = r['gpt3_completion']
-            comp = json.dumps(r['completion'], indent=2).replace("\u2212", "-")
-            html_doc += f"""<table><tr><td><pre>{comp}</pre></td><td><pre>{gcomp}</pre></td></tr></table>"""
-
-        # write horizontal line
-        html_doc += """<hr>\n"""
-        html_doc += """<hr>\n"""
-        html_doc += """<hr>\n"""
-        html_doc += """<hr>\n"""
-
-
-    with open("results.html", "w") as f:
-        f.write(html_doc)
-
-
 def ent_str_to_words(ent):
     stripped =  [e.strip() for e in ent.split(" ")]
     return [e for e in stripped if e]
