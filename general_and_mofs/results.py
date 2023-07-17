@@ -8,18 +8,10 @@ import copy
 import tqdm
 from sklearn.metrics import f1_score, recall_score, precision_score
 import pprint
-import random 
+
+from utils import read_jsonl
 
 
-def read_jsonl(filename, num_samples=None):
-    with open(filename, "r") as f:
-        lines = f.readlines()
-        samples = []
-        for l in lines:
-            samples.append(json.loads(l))
-        if num_samples is not None:
-            return random.sample(samples, num_samples)
-        return samples
 
 def ent_str_to_words(ent):
     stripped =  [e.strip() for e in ent.split(" ")]
@@ -88,9 +80,10 @@ if __name__ == "__main__":
     all_results = []
     all_winkler_similarities = []
     all_exact_match_accuracy = []
+    all_unparsable = []
 
     if TASK == "mof":
-        ENTS_FROZEN =  ['name_of_mof', 'mof_formula', 'mof_description', 'guest_species', 'applications']
+        ENTS_FROZEN = ['name_of_mof', 'mof_formula', 'mof_description', 'guest_species', 'applications']
         ENTS_FROZEN_NOFORMULA = [e for e in ENTS_FROZEN if e != "name_of_mof"]
     elif TASK == "general":
         ENTS_FROZEN = ["acronym", "applications", "name", "formula", "structure_or_phase", "description"]
@@ -124,8 +117,12 @@ if __name__ == "__main__":
             gold_string = sample["completion"].replace("\n\nEND\n\n", "").strip()
             test_string = sample["gpt3_completion"].replace("\n\nEND\n\n", "").replace('\\', '').strip()
 
-            # print(f"Gold string is {gold_string}")
-            # print(f"Test string is {test_string}")
+
+            print(f"Gold string is {gold_string}")
+            print(f"Test string is {test_string}")
+
+
+            print(gold_string)
 
             gold_json = json.loads(gold_string)
             prompt = sample["prompt"].replace("\n\n###\n\n", "").strip()
@@ -138,17 +135,26 @@ if __name__ == "__main__":
             try:
                 test_json = sample["gpt3_completion"]
                 if isinstance(test_json, str):
-                    try :
+                    try:
                         test_json = json.loads(test_json)
                     except json.decoder.JSONDecodeError as jse:
                         test_json = []
                 for d in test_json:
                     for key in ENTS_FROZEN:
                         if key not in d:
-                            if key in ["formula", "name", "acronym"]:
+                            if key in ["formula", "name", "acronym", "mof_formula", "name_of_mof"]:
                                 d[key] = ""
                             else:
                                 d[key] = [""]
+
+                    # remove extra keys as they are "parsable" but invalid
+                    extra_keys = []
+                    for key in d:
+                        if key not in ENTS_FROZEN:
+                            extra_keys.append(key)
+                    for key in extra_keys:
+                        d.pop(key)
+
             except json.decoder.JSONDecodeError as jse:
                 unparsable += 1
 
@@ -224,11 +230,13 @@ if __name__ == "__main__":
 
         all_exact_match_accuracy.append(exact_matches/total)
         all_winkler_similarities.append(np.mean(jaro_winkler_similarities))
+        all_unparsable.append(unparsable/total)
         all_results.append(results)
 
 
     print("All Exact match accuracy average:", np.mean(all_exact_match_accuracy))
     print("Jaro-Winkler avg similarity:", np.mean(all_winkler_similarities))
+    print("Parsable percentage", 1-np.mean(all_unparsable))
 
 
     outer_keys = ("links", "ents")
@@ -253,4 +261,4 @@ if __name__ == "__main__":
                     arr2avg.append(rd[ok][mk][ik])
                 r_dict_avg[ok][mk][ik] = np.mean(arr2avg)
 
-        pprint.pprint(r_dict_avg)
+    pprint.pprint(r_dict_avg)
