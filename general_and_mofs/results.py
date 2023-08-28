@@ -12,6 +12,23 @@ import pprint
 from utils import read_jsonl
 
 
+def check_equivalence_of_entries(gold_entry, test_entry):
+    ## Entries are a list of dictionaries
+    ## We first order each list, then each dictionary, then compare strings
+
+
+    ### order list by formula key
+    gold_entry = sorted(gold_entry, key=lambda x: x.get('formula', ''))
+    test_entry = sorted(test_entry, key=lambda x: x.get('formula', ''))
+
+    ### order each dictionary by keys
+    gold_entry = [dict(sorted(d.items())) for d in gold_entry]
+    test_entry = [dict(sorted(d.items())) for d in test_entry]
+
+    ### compare strings
+    return str(gold_entry) == str(test_entry)
+
+
 
 def ent_str_to_words(ent):
     stripped =  [e.strip() for e in ent.split(" ")]
@@ -31,12 +48,15 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
         return to_account
 
     for entry in ent_json:
-        formula_words = []
-        for etype, ent_strs in entry.items():
+        formulae = []
+        for etype in ENTS_FROZEN:
+            ent_strs = entry[etype]
             if isinstance(ent_strs, str):
                 for w in ent_str_to_words(ent_strs):
                     to_account[etype].add(w)
-                    formula_words.append(w)
+                if etype == ROOT and ent_strs:
+                    # Formulae must be counted as single words
+                    formulae.append(ent_strs)
             elif isinstance(ent_strs, list):
                 for ent_str in ent_strs:
                     for w in ent_str_to_words(ent_str):
@@ -45,7 +65,7 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
                 raise ValueError(f"Ent strings was a weird type: {type(ent_strs)}, {ent_strs}")
 
         # Add links
-        if formula_words:
+        if formulae:
             for e in ENTS_FROZEN_NOFORMULA:
                 ent_strs = entry[e]
                 words = []
@@ -57,11 +77,12 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
                 else:
                     raise ValueError(f"Ent strings was a weird type: {type(ent_strs)}, {ent_strs}")
 
-
                 if words:
-                    for w in words:
-                        for fw in formula_words:
-                            to_account[f"{ROOT}{LINK_DELIMITER}{e}"].add(f"{fw}{LINK_DELIMITER}{w}")
+                    for f in formulae:
+                        for w in words:
+                            # avoid self-links
+                            if f != w:
+                                to_account[f"{ROOT}{LINK_DELIMITER}{e}"].add(f"{f}{LINK_DELIMITER}{w}")
     return to_account
 
 
@@ -86,7 +107,8 @@ if __name__ == "__main__":
         ENTS_FROZEN = ['name_of_mof', 'mof_formula', 'mof_description', 'guest_species', 'applications']
         ENTS_FROZEN_NOFORMULA = [e for e in ENTS_FROZEN if e != "name_of_mof"]
     elif TASK == "general":
-        ENTS_FROZEN = ["acronym", "applications", "name", "formula", "structure_or_phase", "description"]
+        # ENTS_FROZEN = ["acronym", "applications", "name", "formula", "structure_or_phase", "description"]
+        ENTS_FROZEN = ["applications", "name", "formula", "structure_or_phase", "description"]
         ENTS_FROZEN_NOFORMULA = [e for e in ENTS_FROZEN if e != "formula"]
     # ENTS_FROZEN_NOFORMULA = [e for e in ENTS_FROZEN if e != "mof_formula"]
     LINK_DELIMITER = "|||"
@@ -128,9 +150,15 @@ if __name__ == "__main__":
             prompt = sample["prompt"].replace("\n\n###\n\n", "").strip()
             n_prompt_words = len([w for w in prompt.split(" ") if w])
 
+
+            if any(gj["acronym"] for gj in gold_json):
+                print("ACRONYM FOUND")
+                pprint.pprint(gold_json)
+
+
             total += 1
-            if gold_string == test_string:
-                exact_matches += 1
+            # if gold_string == test_string:
+            #     exact_matches += 1
             test_json = {}
             try:
                 test_json = sample["gpt3_completion"]
@@ -158,6 +186,9 @@ if __name__ == "__main__":
             except json.decoder.JSONDecodeError as jse:
                 unparsable += 1
 
+            if check_equivalence_of_entries(gold_json, test_json):
+                exact_matches += 1
+
             jws = jellyfish.jaro_winkler_similarity(gold_string, test_string, long_tolerance=True)
             jaro_winkler_similarities.append(jws)
 
@@ -167,6 +198,11 @@ if __name__ == "__main__":
                 test_accounting = ent_json_to_word_basis_sets(test_json)
             else:
                 test_accounting = ent_json_to_word_basis_sets({}, return_empty=True)
+
+
+            print("Gold entry is", pprint.pformat(gold_json))
+            print("Test accounting is", pprint.pformat(test_accounting))
+            print("Gold accounting is", pprint.pformat(gold_accounting))
 
             for etype in ENTS_FROZEN:
                 ent_accounting_copy = copy.deepcopy(test_accounting[etype])
@@ -183,7 +219,7 @@ if __name__ == "__main__":
                     else:
                         ent_scores_test[etype].append(0)
                         ent_scores_gold[etype].append(1)
-                        n_unlabelled_words-= 1
+                        n_unlabelled_words -= 1
 
                 # Among the remaining test accounting words, only false positives
                 # should remain in the set
@@ -223,8 +259,8 @@ if __name__ == "__main__":
             n_correct = links_scores[elinktype]["test_correct_triplets"]
             n_retrieved = links_scores[elinktype]["test_retrieved_triplets"]
             n_gold_retrieved = links_scores[elinktype]["gold_retrieved_triplets"]
-            subdict["precision"] = n_correct/n_retrieved
-            subdict["recall"] = n_correct/n_gold_retrieved
+            subdict["precision"] = n_correct/n_retrieved if n_retrieved > 0 else 0
+            subdict["recall"] = n_correct/n_gold_retrieved if n_gold_retrieved > 0 else 1
             subdict["f1"] = 2 * (subdict["precision"] * subdict["recall"])/(subdict["precision"] + subdict["recall"])
             results["links"][elinktype] = subdict
 
