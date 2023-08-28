@@ -1,5 +1,3 @@
-from utils import load_annotation
-
 import json
 import os
 import numpy as np
@@ -48,15 +46,16 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
         return to_account
 
     for entry in ent_json:
-        formulae = []
+        root_accounting = {root: set() for root in ROOT}
         for etype in ENTS_FROZEN:
             ent_strs = entry[etype]
             if isinstance(ent_strs, str):
                 for w in ent_str_to_words(ent_strs):
                     to_account[etype].add(w)
-                if etype == ROOT and ent_strs:
-                    # Formulae must be counted as single words
-                    formulae.append(ent_strs)
+                if etype in ROOT and ent_strs:
+                    # Formulae/roots must be counted as single words
+                    root_accounting[etype].add(ent_strs)
+                    # root_accounting[etype] = root_accounting[etype].union(set(ent_str_to_words(ent_strs)))
             elif isinstance(ent_strs, list):
                 for ent_str in ent_strs:
                     for w in ent_str_to_words(ent_str):
@@ -65,24 +64,25 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
                 raise ValueError(f"Ent strings was a weird type: {type(ent_strs)}, {ent_strs}")
 
         # Add links
-        if formulae:
-            for e in ENTS_FROZEN_NOFORMULA:
-                ent_strs = entry[e]
-                words = []
-                if isinstance(ent_strs, str):
-                    words = ent_str_to_words(ent_strs)
-                elif isinstance(ent_strs, list):
-                    for ent_str in ent_strs:
-                        words += ent_str_to_words(ent_str)
-                else:
-                    raise ValueError(f"Ent strings was a weird type: {type(ent_strs)}, {ent_strs}")
+        for root, accounting in root_accounting.items():
+            if accounting:
+                for e in ENTS_FROZEN_NOROOT:
+                    ent_strs = entry[e]
+                    words = []
+                    if isinstance(ent_strs, str):
+                        words = ent_str_to_words(ent_strs)
+                    elif isinstance(ent_strs, list):
+                        for ent_str in ent_strs:
+                            words += ent_str_to_words(ent_str)
+                    else:
+                        raise ValueError(f"Ent strings was a weird type: {type(ent_strs)}, {ent_strs}")
 
-                if words:
-                    for f in formulae:
-                        for w in words:
-                            # avoid self-links
-                            if f != w:
-                                to_account[f"{ROOT}{LINK_DELIMITER}{e}"].add(f"{f}{LINK_DELIMITER}{w}")
+                    if words:
+                        for f in accounting:
+                            for w in words:
+                                # avoid self-links
+                                if f != w:
+                                    to_account[f"{root}{LINK_DELIMITER}{e}"].add(f"{f}{LINK_DELIMITER}{w}")
     return to_account
 
 
@@ -105,18 +105,20 @@ if __name__ == "__main__":
 
     if TASK == "mof":
         ENTS_FROZEN = ['name_of_mof', 'mof_formula', 'mof_description', 'guest_species', 'applications']
-        ENTS_FROZEN_NOFORMULA = [e for e in ENTS_FROZEN if e != "name_of_mof"]
     elif TASK == "general":
-        # ENTS_FROZEN = ["acronym", "applications", "name", "formula", "structure_or_phase", "description"]
-        ENTS_FROZEN = ["applications", "name", "formula", "structure_or_phase", "description"]
-        ENTS_FROZEN_NOFORMULA = [e for e in ENTS_FROZEN if e != "formula"]
-    # ENTS_FROZEN_NOFORMULA = [e for e in ENTS_FROZEN if e != "mof_formula"]
+        ENTS_FROZEN = ["acronym", "applications", "name", "formula", "structure_or_phase", "description"]
+        # ENTS_FROZEN = ["applications", "name", "formula", "structure_or_phase", "description"]
     LINK_DELIMITER = "|||"
     if TASK == "mof":
-        ROOT = "name_of_mof"
+        ROOT = ("name_of_mof",)
     elif TASK == "general":
-        ROOT = "formula"
-    ENTS_LINKS_FROZEN = [f"{ROOT}{LINK_DELIMITER}{e}" for e in ENTS_FROZEN_NOFORMULA]
+        # ROOT = "formula"
+        ROOT = ("formula",)
+    else:
+        raise ValueError(f"There is no task '{TASK}'")
+        
+    ENTS_FROZEN_NOROOT = [e for e in ENTS_FROZEN if e not in ROOT]
+    ENTS_LINKS_FROZEN = [f"{root}{LINK_DELIMITER}{e}" for e in ENTS_FROZEN_NOROOT for root in ROOT]
 
 
     for fn in os.listdir(RESULTS_DIR):
@@ -149,12 +151,6 @@ if __name__ == "__main__":
             gold_json = json.loads(gold_string)
             prompt = sample["prompt"].replace("\n\n###\n\n", "").strip()
             n_prompt_words = len([w for w in prompt.split(" ") if w])
-
-
-            if any(gj["acronym"] for gj in gold_json):
-                print("ACRONYM FOUND")
-                pprint.pprint(gold_json)
-
 
             total += 1
             # if gold_string == test_string:
@@ -259,9 +255,16 @@ if __name__ == "__main__":
             n_correct = links_scores[elinktype]["test_correct_triplets"]
             n_retrieved = links_scores[elinktype]["test_retrieved_triplets"]
             n_gold_retrieved = links_scores[elinktype]["gold_retrieved_triplets"]
+
+            print(elinktype)
             subdict["precision"] = n_correct/n_retrieved if n_retrieved > 0 else 0
+
+            # n_gold_retrieved can be zero in some folds
             subdict["recall"] = n_correct/n_gold_retrieved if n_gold_retrieved > 0 else 1
-            subdict["f1"] = 2 * (subdict["precision"] * subdict["recall"])/(subdict["precision"] + subdict["recall"])
+            try:
+                subdict["f1"] = 2 * (subdict["precision"] * subdict["recall"])/(subdict["precision"] + subdict["recall"])
+            except ZeroDivisionError:
+                subdict["f1"] = 0
             results["links"][elinktype] = subdict
 
         all_exact_match_accuracy.append(exact_matches/total)
