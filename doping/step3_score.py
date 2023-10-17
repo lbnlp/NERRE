@@ -145,10 +145,11 @@ def evaluate(gold, test, loud=False):
             sequences_total += 1
 
             if test_completion == gold_completion:
-                print("Sequences are identical")
+                if loud:
+                    print("Sequences are identical")
                 sequences_correct += 1
             elif loud:
-                print("Sequences difer:")
+                print("Sequences differ:")
                 print(test_completion)
                 print(gold_completion)
 

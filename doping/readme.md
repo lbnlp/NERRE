@@ -99,7 +99,7 @@ Decoded 31 samples to file REPO_DIR/doping/data/inference_decoded_eng_2023-06-13
 
 Now evaluate the predicted data compared to the true test set annotations, including sequence accuracy similarity according to Jaro-Winkler using the Eng schema:
 ```bash
-$: python step3_score.py eng --pred_file "data/inference_decoded_eng_2023-06-13_15.58.18.json"
+$: python step3_score.py eng --pred_file "data/inference_decoded_eng.json"
 ```
 
 Output:

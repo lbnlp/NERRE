@@ -87,13 +87,22 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
 
 
 if __name__ == "__main__":
-    printmode=False
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--results_dir", type=str, default="general_results")
     # must be general or mof
     parser.add_argument("--task", type=str, default="general", choices=["general", "mof"], help="Which schema is being used")
+
+    parser.add_argument(
+        "--loud",
+        action='store_true',
+        help="If true, show a summary of each evaluated sentence w/ FP and FNs.",
+        required=False
+    )
+
     args = parser.parse_args()
+    printmode = args.loud
+
     RESULTS_DIR = args.results_dir
     TASK = args.task
 
@@ -112,7 +121,6 @@ if __name__ == "__main__":
     if TASK == "mof":
         ROOT = ("name_of_mof",)
     elif TASK == "general":
-        # ROOT = "formula"
         ROOT = ("formula",)
     else:
         raise ValueError(f"There is no task '{TASK}'")
@@ -127,25 +135,15 @@ if __name__ == "__main__":
         unparsable = 0
         total = 0
         jaro_winkler_similarities = []
-
-
         ent_scores_test = {e: [] for e in ENTS_FROZEN}
         ent_scores_gold = {e: [] for e in ENTS_FROZEN}
-
-
         subdict = {"test_correct_triplets": 0, "test_retrieved_triplets": 0, "gold_retrieved_triplets": 0}
         links_scores = {el: copy.deepcopy(subdict) for el in ENTS_LINKS_FROZEN}
 
 
-        for sample in tqdm.tqdm(run):
+        for ie, sample in tqdm.tqdm(enumerate(run)):
             gold_string = sample["completion"].replace("\n\nEND\n\n", "").strip()
             test_string = sample["gpt3_completion"].replace("\n\nEND\n\n", "").replace('\\', '').strip()
-
-            if printmode:
-                print(f"Gold string is {gold_string}")
-                print(f"Test string is {test_string}")
-
-                print(gold_string)
 
             gold_json = json.loads(gold_string)
             prompt = sample["prompt"].replace("\n\n###\n\n", "").strip()
@@ -155,6 +153,7 @@ if __name__ == "__main__":
             # if gold_string == test_string:
             #     exact_matches += 1
             test_json = {}
+            was_unparsable = False
             try:
                 test_json = sample["gpt3_completion"]
                 if isinstance(test_json, str):
@@ -180,9 +179,13 @@ if __name__ == "__main__":
 
             except json.decoder.JSONDecodeError as jse:
                 unparsable += 1
+                was_unparsable = True
 
             if check_equivalence_of_entries(gold_json, test_json):
                 exact_matches += 1
+                was_exact = True
+            else:
+                was_exact = False
 
             jws = jellyfish.jaro_winkler_similarity(gold_string, test_string, long_tolerance=True)
             jaro_winkler_similarities.append(jws)
@@ -195,9 +198,11 @@ if __name__ == "__main__":
                 test_accounting = ent_json_to_word_basis_sets({}, return_empty=True)
 
             if printmode:
-                print("Gold entry is", pprint.pformat(gold_json))
-                print("Test accounting is", pprint.pformat(test_accounting))
-                print("Gold accounting is", pprint.pformat(gold_accounting))
+                print(f"Entry {ie+1} of {len(run)} samples of file {fn}")
+                print(f"Gold entry was {gold_json}")
+                print(f"Test string is {test_json}")
+                print(f"Was exact match: {was_exact}")
+                print(f"Was unparsable: {was_unparsable}")
 
             for etype in ENTS_FROZEN:
                 ent_accounting_copy = copy.deepcopy(test_accounting[etype])
@@ -227,15 +232,28 @@ if __name__ == "__main__":
                 ent_scores_test[etype] += [0] * n_unlabelled_words
                 ent_scores_gold[etype] += [0] * n_unlabelled_words
 
-
             for elinktype in ENTS_LINKS_FROZEN:
                 gold_triples = gold_accounting[elinktype]
                 test_triples = test_accounting[elinktype]
 
-                n_correct_triples = len([e for e in test_triples if e in gold_triples])
+                correct_triples = [e for e in test_triples if e in gold_triples]
+                n_correct_triples = len(correct_triples)
                 links_scores[elinktype]["test_correct_triplets"] += n_correct_triples
                 links_scores[elinktype]["test_retrieved_triplets"] += len(test_triples)
                 links_scores[elinktype]["gold_retrieved_triplets"] += len(gold_triples)
+
+
+
+                if printmode:
+                    print(f"\tLink type: {elinktype}")
+                    print(f"\t\tTrue positives ({len(correct_triples)}: {pprint.pformat(correct_triples)}")
+                    false_negatives = [e for e in gold_triples if e not in test_triples]
+                    false_positives = [e for e in test_triples if e not in gold_triples]
+                    print(f"\t\tFalse negatives ({len(false_negatives)}): {pprint.pformat(false_negatives)}")
+                    print(f"\t\tFalse positives({len(false_positives)})= {pprint.pformat(false_positives)}")
+            if printmode:
+                print("-"*30)
+
 
         results = {"ents": {}, "links": {}}
         for etype in ENTS_FROZEN:
@@ -250,29 +268,18 @@ if __name__ == "__main__":
 
 
         for elinktype in ENTS_LINKS_FROZEN:
-            subdict = {}#"precision": 0, "recall": 0, "f1": 0}
+            subdict = {} #"precision": 0, "recall": 0, "f1": 0}
             n_correct = links_scores[elinktype]["test_correct_triplets"]
             n_retrieved = links_scores[elinktype]["test_retrieved_triplets"]
             n_gold_retrieved = links_scores[elinktype]["gold_retrieved_triplets"]
 
-            if printmode:
-                print(elinktype)
-            # subdict["precision"] = n_correct/n_retrieved if n_retrieved > 0 else 0
-
-            # # n_gold_retrieved can be zero in some folds
-            # subdict["recall"] = n_correct/n_gold_retrieved if n_gold_retrieved > 0 else 1
-            # try:
-            #     subdict["f1"] = 2 * (subdict["precision"] * subdict["recall"])/(subdict["precision"] + subdict["recall"])
-            # except ZeroDivisionError:
-            #     subdict["f1"] = 0
-            # results["links"][elinktype] = subdict
             try:
                 subdict["precision"] = n_correct/n_retrieved
                 subdict["recall"] = n_correct/n_gold_retrieved
             except ZeroDivisionError: # if n_retrieved or n_gold_retrieved is zero, do not append this fold
                 results["links"][elinktype] = {}#subdict # {}
                 continue
-            if n_correct==0: # equivalent to subdict["precision"]==0 & subdict["recall"]==0
+            if n_correct == 0: # equivalent to subdict["precision"]==0 & subdict["recall"]==0
                 subdict["f1"] = 0 # not actually defined but at least this is strict
             else:
                 subdict["f1"] = 2 * (subdict["precision"] * subdict["recall"])/(subdict["precision"] + subdict["recall"])
@@ -283,7 +290,7 @@ if __name__ == "__main__":
         all_unparsable.append(unparsable/total)
         all_results.append(results)
 
-
+    print("Summary: \n" + "-"*20)
     print("All Exact match accuracy average:", np.mean(all_exact_match_accuracy))
     print("Jaro-Winkler avg similarity:", np.mean(all_winkler_similarities))
     print("Parsable percentage", 1-np.mean(all_unparsable))
@@ -291,6 +298,8 @@ if __name__ == "__main__":
 
     outer_keys = ("links", "ents")
     inner_keys = ("recall", "precision", "f1")
+
+    pprint.pprint(all_results)
 
     r_dict_avg = copy.deepcopy(all_results[0])
     for k, v in r_dict_avg.items():
@@ -307,14 +316,14 @@ if __name__ == "__main__":
         for mk in mid_keys: # elink
             for ik in inner_keys: # recall/precision/f1
                 arr2avg = []
-                foldidx = -1
-                for rd in all_results:# fold 
-                    foldidx+=1
+                for foldix, rd in enumerate(all_results): # fold
                     if rd[ok][mk]=={}: # pass for this fold
-                        print("skipped", ok,mk,ik,"for fold",foldidx)
+                        print("skipped", ok, mk, ik, "for fold", foldix, "due to insufficient gold data for link")
                         continue
                     else:
                         arr2avg.append(rd[ok][mk][ik])
+
+                # print(f"For {ok}-{mk}-{ik} we find {arr2avg} -> {np.mean(arr2avg)}")
                 r_dict_avg[ok][mk][ik] = np.mean(arr2avg) #average over folds
 
     pprint.pprint(r_dict_avg)
