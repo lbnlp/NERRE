@@ -328,7 +328,9 @@ if __name__ == "__main__":
     outer_keys = ("links", "ents")
     inner_keys = ("recall", "precision", "f1")
 
-    pprint.pprint(all_results)
+    if printmode:
+        print("Results by fold:")
+        pprint.pprint(all_results)
 
     r_dict_avg = copy.deepcopy(all_results[0])
     for k, v in r_dict_avg.items():
@@ -351,8 +353,8 @@ if __name__ == "__main__":
                         continue
                     else:
                         arr2avg.append(rd[ok][mk][ik])
-
-                print(f"For {ok}-{mk}-{ik} we find {arr2avg} -> {np.mean(arr2avg)}")
+                if printmode:
+                    print(f"For {ok}-{mk}-{ik} we find {arr2avg} -> {np.mean(arr2avg)}")
                 r_dict_avg[ok][mk][ik] = np.mean(arr2avg) #average over folds
 
     pprint.pprint(r_dict_avg)
