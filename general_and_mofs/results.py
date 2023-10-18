@@ -42,14 +42,18 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
     # Must account for these in a weird way because the entries are not ordered :(
     to_account = {e: set() for e in ENTS_FROZEN + ENTS_LINKS_FROZEN}
 
+    # for purposes of counting support only
+    to_account_aux_ents_only = {e: set() for e in ENTS_FROZEN + ENTS_LINKS_FROZEN}
+
     if return_empty:
-        return to_account
+        return to_account, {}
 
     for entry in ent_json:
         root_accounting = {root: set() for root in ROOT}
         for etype in ENTS_FROZEN:
             ent_strs = entry[etype]
             if isinstance(ent_strs, str):
+                to_account_aux_ents_only[etype].add(ent_strs)
                 for w in ent_str_to_words(ent_strs):
                     to_account[etype].add(w)
                 if etype in ROOT and ent_strs:
@@ -58,6 +62,7 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
                     # root_accounting[etype] = root_accounting[etype].union(set(ent_str_to_words(ent_strs)))
             elif isinstance(ent_strs, list):
                 for ent_str in ent_strs:
+                    to_account_aux_ents_only[etype].add(ent_str)
                     for w in ent_str_to_words(ent_str):
                         to_account[etype].add(w)
             else:
@@ -71,6 +76,7 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
                     words = []
                     if isinstance(ent_strs, str):
                         words = ent_str_to_words(ent_strs)
+
                     elif isinstance(ent_strs, list):
                         for ent_str in ent_strs:
                             words += ent_str_to_words(ent_str)
@@ -83,7 +89,13 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
                                 # avoid self-links
                                 if f != w:
                                     to_account[f"{root}{LINK_DELIMITER}{e}"].add(f"{f}{LINK_DELIMITER}{w}")
-    return to_account
+
+                            if isinstance(ent_strs, str):
+                                to_account_aux_ents_only[f"{root}{LINK_DELIMITER}{e}"].add(f"{f}{LINK_DELIMITER}{ent_strs}")
+                            else:
+                                for ent_str in ent_strs:
+                                    to_account_aux_ents_only[f"{root}{LINK_DELIMITER}{e}"].add(f"{f}{LINK_DELIMITER}{ent_str}")
+    return to_account, to_account_aux_ents_only
 
 
 if __name__ == "__main__":
@@ -127,6 +139,14 @@ if __name__ == "__main__":
         
     ENTS_FROZEN_NOROOT = [e for e in ENTS_FROZEN if e not in ROOT]
     ENTS_LINKS_FROZEN = [f"{root}{LINK_DELIMITER}{e}" for e in ENTS_FROZEN_NOROOT for root in ROOT]
+
+
+    support = {
+        "ents": {e: 0 for e in ENTS_FROZEN},
+        "words": {e: 0 for e in ENTS_FROZEN},
+        "links_ents": {e: 0 for e in ENTS_LINKS_FROZEN},
+        "links_words": {e: 0 for e in ENTS_LINKS_FROZEN}
+    }
 
 
     for fn in os.listdir(RESULTS_DIR):
@@ -190,12 +210,22 @@ if __name__ == "__main__":
             jws = jellyfish.jaro_winkler_similarity(gold_string, test_string, long_tolerance=True)
             jaro_winkler_similarities.append(jws)
 
-            gold_accounting = ent_json_to_word_basis_sets(gold_json)
+            gold_accounting, gold_accounting_support_helper = ent_json_to_word_basis_sets(gold_json)
 
             if test_json:
-                test_accounting = ent_json_to_word_basis_sets(test_json)
+                test_accounting, _ = ent_json_to_word_basis_sets(test_json)
             else:
-                test_accounting = ent_json_to_word_basis_sets({}, return_empty=True)
+                test_accounting, _ = ent_json_to_word_basis_sets({}, return_empty=True)
+
+            # this loop is used only for collecting numbers for support
+            # of both multiword ents and the number of words (for both NER and relational)
+            for k, v in gold_accounting_support_helper.items():
+                if LINK_DELIMITER in k:
+                    support["links_ents"][k] += len(v)
+                    support["links_words"][k] += len(gold_accounting[k])
+                else:
+                    support["ents"][k] += len(v)
+                    support["words"][k] += len(gold_accounting[k])
 
             if printmode:
                 print(f"Entry {ie+1} of {len(run)} samples of file {fn}")
@@ -289,6 +319,7 @@ if __name__ == "__main__":
         all_results.append(results)
 
     print("Summary: \n" + "-"*20)
+    print("Support was ", pprint.pformat(support))
     print("All Exact match accuracy average:", np.mean(all_exact_match_accuracy))
     print("Jaro-Winkler avg similarity:", np.mean(all_winkler_similarities))
     print("Parsable percentage", 1-np.mean(all_unparsable))

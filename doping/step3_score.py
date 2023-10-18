@@ -138,12 +138,12 @@ def evaluate(gold, test, loud=False):
             test_entry["triplets"] = []
 
             # assemble triplets
-            for is_gold, rel_entry in enumerate((gold_entry, test_entry)):
+            for is_test, rel_entry in enumerate((gold_entry, test_entry)):
                 for did, bids in rel_entry["dopants2basemats"].items():
                     for bid in bids:
                         bmat_words = rel_entry["basemats"][bid]
                         dop_words = rel_entry["dopants"][did]
-                        if not is_gold:
+                        if not is_test:
                             support["links_ents"] += 1
                         for bmat_word in bmat_words.split(" "):
                             for dop_word in dop_words.split(" "):
