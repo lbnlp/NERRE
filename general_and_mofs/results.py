@@ -242,8 +242,6 @@ if __name__ == "__main__":
                 links_scores[elinktype]["test_retrieved_triplets"] += len(test_triples)
                 links_scores[elinktype]["gold_retrieved_triplets"] += len(gold_triples)
 
-
-
                 if printmode:
                     print(f"\tLink type: {elinktype}")
                     print(f"\t\tTrue positives ({len(correct_triples)}: {pprint.pformat(correct_triples)}")
@@ -323,7 +321,7 @@ if __name__ == "__main__":
                     else:
                         arr2avg.append(rd[ok][mk][ik])
 
-                # print(f"For {ok}-{mk}-{ik} we find {arr2avg} -> {np.mean(arr2avg)}")
+                print(f"For {ok}-{mk}-{ik} we find {arr2avg} -> {np.mean(arr2avg)}")
                 r_dict_avg[ok][mk][ik] = np.mean(arr2avg) #average over folds
 
     pprint.pprint(r_dict_avg)

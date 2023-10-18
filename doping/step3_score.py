@@ -47,12 +47,18 @@ def evaluate(gold, test, loud=False):
 
     sequences_correct = 0
     sequences_total = 0
+    sequences_parsable = 0
     sequences_distances = []
+    support = {
+                "ents": {k: 0 for k in ent_categories},
+               "words": {k: 0 for k in ent_categories},
+               "ents_links": 0,
+            }
 
     for i, val_entry in enumerate(gold):
         for j, s in enumerate(val_entry["doping_sentences"]):
             if not s["relevant"]:
-                break
+                continue
 
             test_entry_tot = test[i]["doping_sentences"][j]["entity_graph_raw"]
             test_entry = {k: test_entry_tot[k] for k in ent_categories + ["dopants2basemats"]}
@@ -67,7 +73,17 @@ def evaluate(gold, test, loud=False):
                 pprint.pprint(gold_entry)
                 pprint.pprint(test_entry)
 
+            if gold_entry and \
+                    not test_entry and \
+                    test[i]["doping_sentences"][j]["gpt3_completion"][-1] not in ("}", "."):
+                if loud:
+                    print("Sequence from LLM was likely not parsable.")
+            else:
+                sequences_parsable += 1
+
             for ent_type in ent_categories:
+
+                gold_ents = gold_entry[ent_type]
 
                 # correcting a relic of a previous annotation scheme
                 if ent_type == "doping_modifiers":
@@ -75,12 +91,18 @@ def evaluate(gold, test, loud=False):
                 else:
                     gold_ents_words = " ".join(list(gold_entry[ent_type].values())).split(" ")
 
-                if loud:
-                    print(ent_type, test_entry)
+
+                support["words"][ent_type] += len(gold_ents_words)
+                support["ents"][ent_type] += 1 if isinstance(gold_ents, str) else len(gold_ents)
+
                 test_ents_words = " ".join(list(test_entry[ent_type].values())).split(" ")
 
                 gold_ents_words = [w for w in gold_ents_words if w]
                 test_ents_words = [w for w in test_ents_words if w]
+
+                if loud:
+                    print(ent_type, test_entry)
+                    print(f"GOLD ENTS WORDS {ent_type}", support["words"][ent_type], len(gold_ents_words), gold_ents_words)
 
                 # print(f"GOLD: {gold_ents_words}")
                 # print(f"TEST: {test_ents_words}")
@@ -125,8 +147,12 @@ def evaluate(gold, test, loud=False):
                                 if bmat_word and dop_word:
                                     rel_entry["triplets"].append(f"{bmat_word} {dop_word}")
 
+
             gold_triplets = gold_entry["triplets"]
             test_triplets = test_entry["triplets"]
+
+            if loud:
+                print("gold triplets", support["ents_links"], len(gold_triplets), gold_triplets)
 
             n_correct_triplets = 0
             for triplet in gold_triplets:
@@ -136,6 +162,8 @@ def evaluate(gold, test, loud=False):
             scores["dopants2basemats"]["n_correct"] += n_correct_triplets
             scores["dopants2basemats"]["test_retrieved"] += len(test_triplets)
             scores["dopants2basemats"]["gold_retrieved"] += len(gold_triplets)
+
+            support["ents_links"] += len(gold_triplets)
 
             # Jaro winkler sequence accuracies
             test_completion = test[i]["doping_sentences"][j]["gpt3_completion"]
@@ -196,7 +224,7 @@ def evaluate(gold, test, loud=False):
     print(f"triplets: prec={triplet_prec}, recall={triplet_recall}, f1={triplet_f1}")
     scores_computed["link triplets"] = {"precision": triplet_prec, "recall": triplet_recall, "f1": triplet_f1}
 
-    return scores_computed, ent_categories, sequences_distances, sequences_correct, sequences_total
+    return scores_computed, ent_categories, sequences_distances, sequences_correct, sequences_parsable, sequences_total, support
 
 
 if __name__ == "__main__":
@@ -261,7 +289,7 @@ if __name__ == "__main__":
 
     print(f"Scoring outputs using \n\ttest file: {args.test_file}\n\tpred file: {args.pred_file}")
 
-    scores_computed, ent_categories, sequences_distances, sequences_correct, sequences_total = evaluate(gold, test, loud=loud)
+    scores_computed, ent_categories, sequences_distances, sequences_correct, sequences_parsable, sequences_total, support = evaluate(gold, test, loud=loud)
     # FOR PLOTTING ONLY
 
     ents_rows = []
@@ -281,8 +309,11 @@ if __name__ == "__main__":
     df["score"] = scores_df
 
     print(df)
+    print("Total sequences was:", sequences_total)
+    print("Frac. Sequences parsable: ", sequences_parsable/sequences_total)
     print("Avg sequence similarity: ", np.mean(sequences_distances))
     print("Frac. of sequences exactly correct: ", sequences_correct/sequences_total)
+    print("Support was: ", pprint.pformat(support))
 
     if plot:
         ax = sns.barplot(x="entity", y="score", hue="metric", data=df)
