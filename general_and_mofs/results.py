@@ -133,7 +133,7 @@ if __name__ == "__main__":
         # ENTS_FROZEN = ["applications", "name", "formula", "structure_or_phase", "description"]
     LINK_DELIMITER = "|||"
     if TASK == "mof":
-        ROOT = ("name_of_mof",)
+        ROOT = ("mof_formula",)
     elif TASK == "general":
         ROOT = ("formula",)
     else:
@@ -222,8 +222,6 @@ if __name__ == "__main__":
             # this loop is used only for collecting numbers for support
             # of both multiword ents and the number of words (for both NER and relational)
 
-            print(gold_accounting_support_helper)
-            print(gold_accounting)
             for k, v in gold_accounting_support_helper.items():
                 if LINK_DELIMITER in k:
                     support["links_ents"][k] += len(set(v))
