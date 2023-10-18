@@ -133,7 +133,7 @@ if __name__ == "__main__":
         # ENTS_FROZEN = ["applications", "name", "formula", "structure_or_phase", "description"]
     LINK_DELIMITER = "|||"
     if TASK == "mof":
-        ROOT = ("mof_formula",)
+        ROOT = ("name_of_mof",)
     elif TASK == "general":
         ROOT = ("formula",)
     else:
