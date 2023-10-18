@@ -52,7 +52,7 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
         root_accounting = {root: set() for root in ROOT}
         for etype in ENTS_FROZEN:
             ent_strs = entry[etype]
-            if isinstance(ent_strs, str):
+            if isinstance(ent_strs, str) and ent_strs:
                 to_account_aux_ents_only[etype].add(ent_strs)
                 for w in ent_str_to_words(ent_strs):
                     to_account[etype].add(w)
@@ -62,10 +62,12 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
                     # root_accounting[etype] = root_accounting[etype].union(set(ent_str_to_words(ent_strs)))
             elif isinstance(ent_strs, list):
                 for ent_str in ent_strs:
-                    to_account_aux_ents_only[etype].add(ent_str)
-                    for w in ent_str_to_words(ent_str):
-                        to_account[etype].add(w)
-            else:
+                    if ent_str:
+                        to_account_aux_ents_only[etype].add(ent_str)
+                        for w in ent_str_to_words(ent_str):
+                            if w:
+                                to_account[etype].add(w)
+            elif ent_strs:
                 raise ValueError(f"Ent strings was a weird type: {type(ent_strs)}, {ent_strs}")
 
         # Add links
@@ -219,12 +221,15 @@ if __name__ == "__main__":
 
             # this loop is used only for collecting numbers for support
             # of both multiword ents and the number of words (for both NER and relational)
+
+            print(gold_accounting_support_helper)
+            print(gold_accounting)
             for k, v in gold_accounting_support_helper.items():
                 if LINK_DELIMITER in k:
-                    support["links_ents"][k] += len(v)
+                    support["links_ents"][k] += len(set(v))
                     support["links_words"][k] += len(gold_accounting[k])
                 else:
-                    support["ents"][k] += len(v)
+                    support["ents"][k] += len(set(v))
                     support["words"][k] += len(gold_accounting[k])
 
             if printmode:
