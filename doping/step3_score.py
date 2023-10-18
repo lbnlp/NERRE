@@ -52,7 +52,8 @@ def evaluate(gold, test, loud=False):
     support = {
                 "ents": {k: 0 for k in ent_categories},
                "words": {k: 0 for k in ent_categories},
-               "ents_links": 0,
+               "links_words": 0,
+                "links_ents": 0,
             }
 
     for i, val_entry in enumerate(gold):
@@ -73,9 +74,10 @@ def evaluate(gold, test, loud=False):
                 pprint.pprint(gold_entry)
                 pprint.pprint(test_entry)
 
-            if gold_entry and \
-                    not test_entry and \
-                    test[i]["doping_sentences"][j]["gpt3_completion"][-1] not in ("}", "."):
+            # this is a proxy to find the unparsable sequences,
+            # since by default the processing script will either throw error
+            # for unparsable sequences or will pass them and return empty decoded entry
+            if not test[i]["doping_sentences"][j]["gpt3_completion"][-1] in ["}", ".", "\n"]:
                 if loud:
                     print("Sequence from LLM was likely not parsable.")
             else:
@@ -102,7 +104,6 @@ def evaluate(gold, test, loud=False):
 
                 if loud:
                     print(ent_type, test_entry)
-                    print(f"GOLD ENTS WORDS {ent_type}", support["words"][ent_type], len(gold_ents_words), gold_ents_words)
 
                 # print(f"GOLD: {gold_ents_words}")
                 # print(f"TEST: {test_ents_words}")
@@ -137,11 +138,13 @@ def evaluate(gold, test, loud=False):
             test_entry["triplets"] = []
 
             # assemble triplets
-            for rel_entry in (gold_entry, test_entry):
+            for is_gold, rel_entry in enumerate((gold_entry, test_entry)):
                 for did, bids in rel_entry["dopants2basemats"].items():
                     for bid in bids:
                         bmat_words = rel_entry["basemats"][bid]
                         dop_words = rel_entry["dopants"][did]
+                        if not is_gold:
+                            support["links_ents"] += 1
                         for bmat_word in bmat_words.split(" "):
                             for dop_word in dop_words.split(" "):
                                 if bmat_word and dop_word:
@@ -150,9 +153,6 @@ def evaluate(gold, test, loud=False):
 
             gold_triplets = gold_entry["triplets"]
             test_triplets = test_entry["triplets"]
-
-            if loud:
-                print("gold triplets", support["ents_links"], len(gold_triplets), gold_triplets)
 
             n_correct_triplets = 0
             for triplet in gold_triplets:
@@ -163,7 +163,7 @@ def evaluate(gold, test, loud=False):
             scores["dopants2basemats"]["test_retrieved"] += len(test_triplets)
             scores["dopants2basemats"]["gold_retrieved"] += len(gold_triplets)
 
-            support["ents_links"] += len(gold_triplets)
+            support["links_words"] += len(gold_triplets)
 
             # Jaro winkler sequence accuracies
             test_completion = test[i]["doping_sentences"][j]["gpt3_completion"]
@@ -278,6 +278,7 @@ if __name__ == "__main__":
     elif schema_type == "engextra":
         fmt = "eng"
         kwargs = {"write_results": True, "write_modifiers": True}
+        EVALUATE_MODIFIERS_AND_RESULTS = True
     else:
         fmt = "json"
 
