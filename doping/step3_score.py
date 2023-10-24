@@ -4,6 +4,7 @@ potential schemas presented in the publication.
 """
 import os
 import argparse
+import json
 
 import pandas as pd
 from monty.serialization import loadfn
@@ -18,7 +19,7 @@ from step2_train_predict import llm_completion_from_sentence_json
 
 EVALUATE_MODIFIERS_AND_RESULTS = False
 
-def evaluate(gold, test, loud=False):
+def evaluate(gold, test, loud=False, lowercase=False):
     """
     Evaluate the performance of the model on the test set.
 
@@ -26,6 +27,7 @@ def evaluate(gold, test, loud=False):
         gold (list): list of dictionaries containing the gold standard annotations
         test (list): list of dictionaries containing the model's predictions (in same format)
         loud (bool): whether to print out the results of each sentence
+        lowercase (bool=): if true, use lowerase
 
     Returns:
         scores_computed (dict): dictionary of scores by entity
@@ -56,6 +58,8 @@ def evaluate(gold, test, loud=False):
                 "links_ents": 0,
             }
 
+    parsability_valid = True
+
     for i, val_entry in enumerate(gold):
         for j, s in enumerate(val_entry["doping_sentences"]):
             if not s["relevant"]:
@@ -69,15 +73,47 @@ def evaluate(gold, test, loud=False):
                 test_entry["dopants2basemats"] = {}
 
             sentence_text = s["sentence_text"]
+            gold_completion = s["completion"]
+
+            if lowercase:
+                # Adjust the sequence-level scoring for seq2rel
+                # lowercase the gold entries if we need to account for things in lowercase
+                for k in ("dopants", "basemats"):
+                    for ent_id, ent_val in gold_entry[k].items():
+                        gold_entry[k][ent_id] = ent_val.lower()
+                # seq2rel needs some adjustment for this
+                gold_completion = json.dumps({k: gold_entry[k] for k in ["dopants", "basemats", "dopants2basemats"]})
+                test_completion = json.dumps({k: test_entry[k] for k in ["dopants", "basemats", "dopants2basemats"]})
+                gold_completion = gold_completion.lower()\
+                    .replace("\n", "") \
+                    .replace("  ", " ") \
+                    .replace("{ ", "{") \
+                    .replace(" }", "}") \
+                    .replace(" .", ".") \
+                    .replace("[ ", "[") \
+                    .replace(" ]", "]") \
+                    .strip()
+            else:
+                try:
+                    test_completion = test[i]["doping_sentences"][j][
+                        "llm_completion"]
+                except KeyError:
+                    print(
+                        "WARNING: Could not find completion key for test completion. Sequence-level results will be incorrect.")
+                    test_completion = " "
+                    parsability_valid = False
+
             if loud:
                 print(s["sentence_text"])
                 pprint.pprint(gold_entry)
                 pprint.pprint(test_entry)
 
+
+
             # this is a proxy to find the unparsable sequences,
             # since by default the processing script will either throw error
             # for unparsable sequences or will pass them and return empty decoded entry
-            if not test[i]["doping_sentences"][j]["gpt3_completion"][-1] in ["}", ".", "\n"]:
+            if not test_completion[-1] in ["}", ".", "\n"]:
                 if loud:
                     print("Sequence from LLM was likely not parsable.")
             else:
@@ -166,8 +202,6 @@ def evaluate(gold, test, loud=False):
             support["links_words"] += len(gold_triplets)
 
             # Jaro winkler sequence accuracies
-            test_completion = test[i]["doping_sentences"][j]["gpt3_completion"]
-            gold_completion = s["completion"]
             dist = jellyfish.jaro_winkler_similarity(gold_completion, test_completion)
             sequences_distances.append(dist)
             sequences_total += 1
@@ -224,7 +258,16 @@ def evaluate(gold, test, loud=False):
     print(f"triplets: prec={triplet_prec}, recall={triplet_recall}, f1={triplet_f1}")
     scores_computed["link triplets"] = {"precision": triplet_prec, "recall": triplet_recall, "f1": triplet_f1}
 
-    return scores_computed, ent_categories, sequences_distances, sequences_correct, sequences_parsable, sequences_total, support
+    return (
+            scores_computed,
+            ent_categories,
+            sequences_distances,
+            sequences_correct,
+            sequences_parsable,
+            sequences_total,
+            support,
+            parsability_valid
+            )
 
 
 if __name__ == "__main__":
@@ -264,12 +307,19 @@ if __name__ == "__main__":
         required=False
     )
 
+    p.add_argument(
+        "--enforce-lowercase",
+        action='store_true',
+        help="If true, lowercase all words for evaluation. Should only be used with seq2rel results."
+    )
+
     args = p.parse_args()
     gold = loadfn(args.test_file)
     test = loadfn(args.pred_file)
     plot = args.plot
     loud = args.loud
     schema_type = args.schema_type
+    lowercase = args.enforce_lowercase
 
     kwargs = {"write_results": False, "write_modifiers": False}
     if schema_type == "eng":
@@ -282,7 +332,6 @@ if __name__ == "__main__":
     else:
         fmt = "json"
 
-
     for gj in gold:
         for sjson in gj["doping_sentences"]:
             c = llm_completion_from_sentence_json(sjson, stop_token="", fmt=fmt, **kwargs)
@@ -290,8 +339,22 @@ if __name__ == "__main__":
 
     print(f"Scoring outputs using \n\ttest file: {args.test_file}\n\tpred file: {args.pred_file}")
 
-    scores_computed, ent_categories, sequences_distances, sequences_correct, sequences_parsable, sequences_total, support = evaluate(gold, test, loud=loud)
+    (
+         scores_computed,
+         ent_categories,
+         sequences_distances,
+         sequences_correct,
+         sequences_parsable,
+         sequences_total,
+         support,
+         parsability_valid
+     ) = evaluate(gold, test, loud=loud, lowercase=lowercase)
     # FOR PLOTTING ONLY
+
+
+    if not parsability_valid:
+        print("Sequence-level formats invalid. Skipping sequence-level metrics.")
+
 
     ents_rows = []
     for entc in ent_categories:
@@ -310,6 +373,7 @@ if __name__ == "__main__":
     df["score"] = scores_df
 
     print(df)
+
     print("Total sequences was:", sequences_total)
     print("Frac. Sequences parsable: ", sequences_parsable/sequences_total)
     print("Avg sequence similarity: ", np.mean(sequences_distances))

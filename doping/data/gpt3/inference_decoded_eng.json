@@ -12,7 +12,7 @@
           "Ga"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'ZnO' was doped with 'Al'.\nThe host 'ZnO' was doped with 'Ga'.\nThe host 'ZnO' was doped with 'In'.\n",
+        "llm_completion": " The host 'ZnO' was doped with 'Al'.\nThe host 'ZnO' was doped with 'Ga'.\nThe host 'ZnO' was doped with 'In'.\n",
         "gpt3_logprobs_numbers": [
           -7.3446927e-06,
           -1.5094201e-05,
@@ -145,7 +145,7 @@
           "Ga"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'ZnO' was doped with 'Al'.\nThe host 'ZnO' was doped with 'Ga'.\nThe host 'ZnO' was doped with 'In'.\n",
+        "llm_completion": " The host 'ZnO' was doped with 'Al'.\nThe host 'ZnO' was doped with 'Ga'.\nThe host 'ZnO' was doped with 'In'.\n",
         "gpt3_logprobs_numbers": [
           -6.3900848e-06,
           -1.2112103e-05,
@@ -277,7 +277,7 @@
           "Ga"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.014255958,
           0,
@@ -326,7 +326,7 @@
         "sentence_text": "The presence of dopant in the solution induces significant modifications in the deposition rate, which varies between 110 and 40\u00a0nm\u00a0min\u22121.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.00040952102,
           0,
@@ -378,7 +378,7 @@
           "Zn"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Zn' was doped.\n",
+        "llm_completion": " The host 'Zn' was doped.\n",
         "gpt3_logprobs_numbers": [
           -0.42939055,
           -1.3661821e-05,
@@ -434,7 +434,7 @@
           "ZnO"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'ZnO' was doped with 'Al'.\nThe host 'ZnO' was doped with 'Ga'.\n",
+        "llm_completion": " The host 'ZnO' was doped with 'Al'.\nThe host 'ZnO' was doped with 'Ga'.\n",
         "gpt3_logprobs_numbers": [
           -1.1873685e-05,
           -6.5092986e-06,
@@ -527,7 +527,7 @@
         "sentence_text": "Optical measurements also yield an inverse correlation between carrier density and mobility.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -542,7 +542,7 @@
         "sentence_text": "Doping enlarges the bandgap, as well as the Urbach energy that is related to the films\u2019 disorder.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -557,7 +557,7 @@
         "sentence_text": "The lowest electrical resistivity, measured by four-point probe, is 1.7\u00a0\u00d7\u00a010\u22122\u00a0\u03a9\u00a0cm and is obtained for In-doped films after being exposed to ultraviolet light.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " The host 'films' was doped with 'In'.\n",
+        "llm_completion": " The host 'films' was doped with 'In'.\n",
         "gpt3_logprobs_numbers": [
           -0.0001506467,
           -4.9586424e-06,
@@ -616,7 +616,7 @@
           "Ga"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'films' was doped with 'Ga'.\n",
+        "llm_completion": " The host 'films' was doped with 'Ga'.\n",
         "gpt3_logprobs_numbers": [
           -4.430127e-05,
           -8.5358415e-06,
@@ -684,7 +684,7 @@
           "Co 4 O 9"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Ca 3 Co 4 O 9' was doped with 'Sr'.\n",
+        "llm_completion": " The host 'Ca 3 Co 4 O 9' was doped with 'Sr'.\n",
         "gpt3_logprobs_numbers": [
           -3.529076e-06,
           -7.3446927e-06,
@@ -760,7 +760,7 @@
           "Co 4 O 9"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -775,7 +775,7 @@
         "sentence_text": "Microstructure has shown good grain orientation, and low porosity while slightly lower grain sizes were obtained in samples prepared from attrition milled powders.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -790,7 +790,7 @@
         "sentence_text": "All samples show the high density of around 96% of the theoretical value.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -805,7 +805,7 @@
         "sentence_text": "These similar characteristics are reflected in, approximately, the same electrical resistivity and Seebeck coefficient values for both types of samples.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -820,7 +820,7 @@
         "sentence_text": "However, in spite of similar power factor (PF) at low temperatures, it is slightly higher at high temperature for the attrition milled samples.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -835,7 +835,7 @@
         "sentence_text": "On the other hand, the processing time reduction (from 38 to 2 h) when using attrition milled precursors, leads to lower mechanical properties in these samples.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -850,7 +850,7 @@
         "sentence_text": "All these data clearly point out to the similar characteristics of both kinds of samples, with a drastic processing time decrease when using attrition milled precursors, which is of the main economic importance when considering their industrial production.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -872,7 +872,7 @@
         "sentence_text": "A MEMS-based thermal infrared emitter for an integrated NDIR spectrometer.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -890,7 +890,7 @@
           "silicon"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'silicon' was doped with 'boron'.\n",
+        "llm_completion": " The host 'silicon' was doped with 'boron'.\n",
         "gpt3_logprobs_numbers": [
           -5.4364154e-06,
           -4.680184e-05,
@@ -963,7 +963,7 @@
         "sentence_text": "The fabrication process has been designed to allow the integration of such infrared emitters with an array of thermopile infrared detectors, with the aim of achieving an integrated non-dispersive infrared microspectrometer.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -980,7 +980,7 @@
           "silicon"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'silicon' was doped.\n",
+        "llm_completion": " The host 'silicon' was doped.\n",
         "gpt3_logprobs_numbers": [
           -8.4157e-06,
           -0.00013323847,
@@ -1031,7 +1031,7 @@
         "sentence_text": "The working temperature of the Jouleheated radiating slabs has been controlled by means of DC and pulsed electrical signals, achieving temperatures well beyond 700\u00b0C.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1046,7 +1046,7 @@
         "sentence_text": "The thermal time constant measured in pulsed operation, around 50 ms, is adequate to enable the direct electrical modulation of the emitted radiation up to a frequency of 5 Hz while maintaining the full modulation depth.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1061,7 +1061,7 @@
         "sentence_text": "The temperature distribution in the radiating elements has been analyzed using two different thermal imaging methods.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1076,7 +1076,7 @@
         "sentence_text": "\u00a9 Springer-Verlag 2012.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1101,7 +1101,7 @@
           "yttrium vanadate"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'yttrium vanadate' was doped with 'europium'.\n",
+        "llm_completion": " The host 'yttrium vanadate' was doped with 'europium'.\n",
         "gpt3_logprobs_numbers": [
           -0.0006863573,
           -1.688045e-05,
@@ -1174,7 +1174,7 @@
         "sentence_text": "\u00a9 The Royal Society of Chemistry.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1191,7 +1191,7 @@
           "TiO2"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1211,7 +1211,7 @@
           "Eu3+"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'yttrium vanadate' was doped with 'europium'.\n",
+        "llm_completion": " The host 'yttrium vanadate' was doped with 'europium'.\n",
         "gpt3_logprobs_numbers": [
           -2.6180607e-05,
           -8.653179e-06,
@@ -1284,7 +1284,7 @@
         "sentence_text": "The nanophosphor provides an enhancement in short-wavelength spectral response of solar cells, and long-term stability is also improved under illumination, due to down-shifting of high energy UV photons to the visible region.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1299,7 +1299,7 @@
         "sentence_text": "Our observations demonstrate that the DS nanophosphor layer can be used as an optical filter with visible light transmission and UV light absorption, through placement on the front surface of DSSCs to provide stability, as well as for improving the performance.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1321,7 +1321,7 @@
         "sentence_text": "The differential specific heat study on the superconductivity for the \u201c214\u201d phase and the doped superconductors.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " The host 'superconductors' was doped.\n",
+        "llm_completion": " The host 'superconductors' was doped.\n",
         "gpt3_logprobs_numbers": [
           -0.0004290187,
           -7.4639065e-06,
@@ -1375,7 +1375,7 @@
           "Ba"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.00023619535,
           -7.8540467e-07,
@@ -1428,7 +1428,7 @@
           "La2\u2212xBaxCuO4\u2212\u03b4"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -5.6340414e-05,
           0,
@@ -1479,7 +1479,7 @@
           "LSCO"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1497,7 +1497,7 @@
           "Cu"
         ],
         "relevant": true,
-        "gpt3_completion": " 'Cu' is a dopant.\n",
+        "llm_completion": " 'Cu' is a dopant.\n",
         "gpt3_logprobs_numbers": [
           -5.675771e-06,
           -0.00024215765,
@@ -1555,7 +1555,7 @@
         "sentence_text": "Electron dynamical response in InP semiconductors driven by fluctuating electric fields.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1570,7 +1570,7 @@
         "sentence_text": "The complexity of electron dynamics in low-doped n-type InP crystals operating under fluctuating electric fields is deeply explored and discussed.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " The host 'InP' was doped.\n",
+        "llm_completion": " The host 'InP' was doped.\n",
         "gpt3_logprobs_numbers": [
           -7.8540467e-07,
           -1.1159372e-05,
@@ -1621,7 +1621,7 @@
         "sentence_text": "In this study, we employ a multi-particle Monte Carlo approach to simulate the non-linear transport of electrons inside the semiconductor bulk.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1636,7 +1636,7 @@
         "sentence_text": "All possible scattering events of hot electrons in the medium, the main details of the band structure, as well as the heating effects, are taken into account.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1651,7 +1651,7 @@
         "sentence_text": "The results presented in this study derive from numerical simulations of the electron dynamical response to the application of a sub-Thz electric field, fluctuating for the superimposition of an external source of Gaussian correlated noise.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1666,7 +1666,7 @@
         "sentence_text": "The electronic noise features are statistically investigated by computing the correlation function of the velocity fluctuations, its spectral density and the variance, i.e. the total noise power, for different values of amplitude and frequency of the driving field.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1681,7 +1681,7 @@
         "sentence_text": "Our results show the presence of a cooperative non-linear behavior of electrons, whose dynamics is strongly affected by the field fluctuations.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1696,7 +1696,7 @@
         "sentence_text": "Moreover, the electrons self-organize among different valleys, giving rise to the reduction of the intrinsic noise.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1711,7 +1711,7 @@
         "sentence_text": "This counterintuitive effect critically depends on the relationship among the characteristic times of the external fluctuations and the temporal scales of complex phenomena involved in the electron dynamical response.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1726,7 +1726,7 @@
         "sentence_text": "In particular, the correlation time of the electric field fluctuations appears to be crucial both for the noise reduction effect and the appearance of an anomalous diffusion effect.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1750,7 +1750,7 @@
           "CuO4"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.000116426294,
           0,
@@ -1799,7 +1799,7 @@
         "sentence_text": "Eleven Raman active crystal-field (CF) excitations involving 4f electrons are detected in Pr1.90Ce0.10CuO4 and Pr1.85Ce0.15CuO4.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1816,7 +1816,7 @@
           "Pr3+"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1833,7 +1833,7 @@
           "Pr2CuO4"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -1851,7 +1851,7 @@
           "cerium"
         ],
         "relevant": true,
-        "gpt3_completion": " 'cerium' is a dopant.\n",
+        "llm_completion": " 'cerium' is a dopant.\n",
         "gpt3_logprobs_numbers": [
           -0.0034097356,
           -0.00085242523,
@@ -1904,7 +1904,7 @@
           "Nd2\u2212xCexCuO4"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -7.9112084e-05,
           0,
@@ -1957,7 +1957,7 @@
           "214 cuprates"
         ],
         "relevant": true,
-        "gpt3_completion": " The host '214 cuprates' was doped with 'Ce'.\n",
+        "llm_completion": " The host '214 cuprates' was doped with 'Ce'.\n",
         "gpt3_logprobs_numbers": [
           -0.00018200328,
           -7.698572e-06,
@@ -2033,7 +2033,7 @@
           "Ce"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'compounds' was doped with 'Ce'.\n",
+        "llm_completion": " The host 'compounds' was doped with 'Ce'.\n",
         "gpt3_logprobs_numbers": [
           -0.00020990093,
           -8.4157e-06,
@@ -2106,7 +2106,7 @@
         "sentence_text": "Also, in contrast to previous Raman and neutron studies, the pronounced 125 cm\u22121 feature is found to be the low energy Eg symmetry phonon rather than a CF excitation.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2128,7 +2128,7 @@
         "sentence_text": "Semiconductor plasmonic crystals: Active control of THz extinction.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2143,7 +2143,7 @@
         "sentence_text": "We investigate theoretically the enhanced THz extinction by periodic arrays of semiconductor particles.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2158,7 +2158,7 @@
         "sentence_text": "Scattering particles of doped semiconductors can sustain localized surface plasmon polaritons, which can be diffractively coupled giving rise to surface lattice resonances.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " The host 'semiconductors' was doped.\n",
+        "llm_completion": " The host 'semiconductors' was doped.\n",
         "gpt3_logprobs_numbers": [
           -7.8540467e-07,
           -1.0920954e-05,
@@ -2209,7 +2209,7 @@
         "sentence_text": "These resonances are characterized by a large extinction and narrow bandwidth, which can be tuned by controlling the charge carrier density in the semiconductor.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2226,7 +2226,7 @@
           "GaAs"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2243,7 +2243,7 @@
           "GaAs"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2258,7 +2258,7 @@
         "sentence_text": "\u00a9 2013 IOP Publishing Ltd.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2283,7 +2283,7 @@
           "barium"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'barium cerate' was doped with 'yttrium'.\n",
+        "llm_completion": " The host 'barium cerate' was doped with 'yttrium'.\n",
         "gpt3_logprobs_numbers": [
           -4.2433903e-06,
           -4.361666e-06,
@@ -2361,7 +2361,7 @@
           "(2019) 18,135\u201318142"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'barium cerate' was doped with 'yttrium'.\n",
+        "llm_completion": " The host 'barium cerate' was doped with 'yttrium'.\n",
         "gpt3_logprobs_numbers": [
           -1.843017e-05,
           -1.2588937e-05,
@@ -2437,7 +2437,7 @@
           "hydrocarbon"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2452,7 +2452,7 @@
         "sentence_text": "Nonetheless, electrochemical transport properties of grain boundaries of BCY are still not well understood.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2467,7 +2467,7 @@
         "sentence_text": "Hence, we compare specific grain boundary conductivity and space-charge properties of BaCe0\u00b79Y0\u00b71O3-\u03b4 (BCY10) in both wet and low humidity by means of impedance spectroscopy in the temperature range 100\u2013300 \u00b0C.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2482,7 +2482,7 @@
         "sentence_text": "In H2, specific grain boundary conductivity increases in nominally dry conditions, while the bulk remains practically humidity independent.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2499,7 +2499,7 @@
           "O2"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2516,7 +2516,7 @@
           "pH2O"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2531,7 +2531,7 @@
         "sentence_text": "This work offers a significant advance to the knowledge of the transport properties of this family of materials at low temperatures, with special emphasis to conditions of low humidity, for potential future applications in proton-conducting electrolyte membranes.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2555,7 +2555,7 @@
           "LSCO"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2573,7 +2573,7 @@
           "Glover"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -2.9636725e-05,
           0,
@@ -2622,7 +2622,7 @@
         "sentence_text": "A new conductivity peak is observed below T c at \u223c120 meV, which indicates a possible new collective mode and strongly increases the FGT sum rule violation.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2637,7 +2637,7 @@
         "sentence_text": "The absolute value of the violation is larger for the optimally doped sample.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " The host 'sample' was doped.\n",
+        "llm_completion": " The host 'sample' was doped.\n",
         "gpt3_logprobs_numbers": [
           -4.048565e-05,
           -6.0395385e-05,
@@ -2688,7 +2688,7 @@
         "sentence_text": "The sum rule starts to recover in the range of the low-lying interband transitions (\u223c1 eV).",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2703,7 +2703,7 @@
         "sentence_text": "In the normal state no clear energy scale of the pseudogap can be seen.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2728,7 +2728,7 @@
           "ZnTiO3"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'ZnTiO3' was doped with 'Mg'.\n",
+        "llm_completion": " The host 'ZnTiO3' was doped with 'Mg'.\n",
         "gpt3_logprobs_numbers": [
           -3.4089344e-06,
           -4.721163e-06,
@@ -2805,7 +2805,7 @@
           "metal oxides"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Zinc titanate' was doped with 'magnesium'.\n",
+        "llm_completion": " The host 'Zinc titanate' was doped with 'magnesium'.\n",
         "gpt3_logprobs_numbers": [
           -0.00023392851,
           -3.2906587e-06,
@@ -2880,7 +2880,7 @@
           "ZnTiO3"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2901,7 +2901,7 @@
           "Mg"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2916,7 +2916,7 @@
         "sentence_text": "The materials thus produced are semiconductors, with a positive temperature coefficient of resistivity.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2933,7 +2933,7 @@
           "magnesium"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2950,7 +2950,7 @@
           "Mg"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -2968,7 +2968,7 @@
           "Mg2+"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.0003998604,
           0,
@@ -3027,7 +3027,7 @@
           "Polysulfone"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Polysulfone Membrane' was doped.\n",
+        "llm_completion": " The host 'Polysulfone Membrane' was doped.\n",
         "gpt3_logprobs_numbers": [
           -7.224551e-06,
           -1.5925843e-05,
@@ -3096,7 +3096,7 @@
           "silica"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3111,7 +3111,7 @@
         "sentence_text": "The optimum preparation conditions of NS-MAG particles were researched and determined.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3126,7 +3126,7 @@
         "sentence_text": "Then the permeation fluxes of NS-MAG/PSF membranes with different doping amount of NS-MAG particles were tested.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " The host 'PSF' was doped with 'NS-MAG'.\n",
+        "llm_completion": " The host 'PSF' was doped with 'NS-MAG'.\n",
         "gpt3_logprobs_numbers": [
           -0.00072435196,
           -1.6521892e-05,
@@ -3201,7 +3201,7 @@
           "SiO2"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3216,7 +3216,7 @@
         "sentence_text": "These membranes were characterized by testing the tensile strength and the permeation flux.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3231,7 +3231,7 @@
         "sentence_text": "The results show that doping NS-MAG particles can better enhance the tensile strength and permeation flux of PSF membrane.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " The host 'PSF membrane' was doped with 'NS-MAG particles'.\n",
+        "llm_completion": " The host 'PSF membrane' was doped with 'NS-MAG particles'.\n",
         "gpt3_logprobs_numbers": [
           -1.6642034e-05,
           -1.1991961e-05,
@@ -3304,7 +3304,7 @@
         "sentence_text": "\u00a9 2012 Copyright Taylor and Francis Group, LLC.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3328,7 +3328,7 @@
           "CdS"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.06560997,
           0,
@@ -3382,7 +3382,7 @@
           "hydrogen"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3397,7 +3397,7 @@
         "sentence_text": "We have prepared sintered CdZnS films by the screen printing method without the presence of the typical flux material.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3412,7 +3412,7 @@
         "sentence_text": "The formation of crystalline ternary compounds is inferred from the X-ray diffraction pattern of these films.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3427,7 +3427,7 @@
         "sentence_text": "Their structural and optical properties are studied by reflection spectra in a wavelength range of 300\u2013600nm.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3445,7 +3445,7 @@
           "cadmium sulfide"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3462,7 +3462,7 @@
           "Na2SO3"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3477,7 +3477,7 @@
         "sentence_text": "This potential interval allowed to determine the flat band potentials from capacity measurements in the dark, which indicated strong contribution of double layer capacitance, surfaces states, and non-uniform doping concentration.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.016798403,
           0,
@@ -3526,7 +3526,7 @@
         "sentence_text": "Electrochemical impedance measurements where further performed, giving detailed information about the relevance of these factors and the optimum composition of coupled semiconductor films for photocatalytic purposes.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3548,7 +3548,7 @@
         "sentence_text": "Checkerboard order in the t \u2013 J model on the square lattice.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3563,7 +3563,7 @@
         "sentence_text": "We propose that the inhomogeneous patterns seen by STM in some underdoped superconducting cuprates could be related to a bond-order-wave instability of the staggered flux state, one of the most studied \u201cnormal\u201d state proposed to compete with the d-wave RVB superconductor.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3578,7 +3578,7 @@
         "sentence_text": "A checkerboard pattern is obtained by a Gutzwiller renormalized mean-field theory of the t\u2013J model for doping around 1 8 .",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.00058687344,
           0,
@@ -3627,7 +3627,7 @@
         "sentence_text": "It is found that the charge modulation is always an order of magnitude smaller than the bond-order modulations.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3642,7 +3642,7 @@
         "sentence_text": "This is confirmed by an exact optimization of the wavefunction by a variational Monte Carlo scheme.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3657,7 +3657,7 @@
         "sentence_text": "The numerical estimates of the order parameters are, however, found to be strongly reduced w.r.t their mean-field values.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3681,7 +3681,7 @@
           "aldehydes"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3702,7 +3702,7 @@
           "pentafluorobenzyl hydroxylamine"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'graphitized carbon black' was doped with 'nitrogen'.\n",
+        "llm_completion": " The host 'graphitized carbon black' was doped with 'nitrogen'.\n",
         "gpt3_logprobs_numbers": [
           -2.4390605e-05,
           -0.00015672446,
@@ -3779,7 +3779,7 @@
           "dicyandiamide"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'graphitized carbon' was doped with 'nitrogen'.\n",
+        "llm_completion": " The host 'graphitized carbon' was doped with 'nitrogen'.\n",
         "gpt3_logprobs_numbers": [
           -3.170517e-06,
           -5.675771e-06,
@@ -3852,7 +3852,7 @@
         "sentence_text": "The effects of magnetic emulsifier amount, extraction time, solution pH, and oil/water volume ratio on the formation of magnetically responsive Pickering emulsion and the extraction efficiency of the proposed dispersive liquid\u2013liquid extraction were also investigated.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3869,7 +3869,7 @@
           "aldehydes"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3886,7 +3886,7 @@
           "aldehydes"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3901,7 +3901,7 @@
         "sentence_text": "The mean recoveries at three spiked levels ranged from 70.0 to 101.4%.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3916,7 +3916,7 @@
         "sentence_text": "With the Pickering emulsion as a \u201cminimized extractor\u201d, the extraction was accomplished within 5\u00a0min.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3931,7 +3931,7 @@
         "sentence_text": "After extraction, the magnetic disperser could be recovered for reuse at least five times by an external magnetic field.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3948,7 +3948,7 @@
           "aldehydes"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3970,7 +3970,7 @@
         "sentence_text": "Relaxation dynamics, dissipative tunneling, solitons, and anomalous decay.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -3987,7 +3987,7 @@
           "halides"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'alkali halides' was doped with 'heavy impurities'.\n",
+        "llm_completion": " The host 'alkali halides' was doped with 'heavy impurities'.\n",
         "gpt3_logprobs_numbers": [
           -4.763911e-05,
           -4.721163e-06,
@@ -4060,7 +4060,7 @@
         "sentence_text": "Of crucial importance is the evolution of the lattice reaction time.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -4075,7 +4075,7 @@
         "sentence_text": "This gives strong support to a Jahn-Teller model which is able to interpret the slow (complex) decay of the emissions in the A band.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -4090,7 +4090,7 @@
         "sentence_text": "The mechanism adopted is borrowed from the dissipative-tunneling approach, previously developed for loaded superconducting Josephson junctions, and suitably modified.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -4105,7 +4105,7 @@
         "sentence_text": "Moreover, an attempt is made for a modification of the model by considering a mechanism based on soliton confinement.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -4120,7 +4120,7 @@
         "sentence_text": "\u00a9 2006 The American Physical Society.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -4145,7 +4145,7 @@
           "CdTe"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'CdTe' was doped with 'arsenic'.\n",
+        "llm_completion": " The host 'CdTe' was doped with 'arsenic'.\n",
         "gpt3_logprobs_numbers": [
           -2.0966954e-06,
           -1.0681599e-05,
@@ -4221,7 +4221,7 @@
           "CdTe"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'CdTe' was doped as 'p-Type'.\n",
+        "llm_completion": " The host 'CdTe' was doped as 'p-Type'.\n",
         "gpt3_logprobs_numbers": [
           -3.2906587e-06,
           -2.3360508e-06,
@@ -4290,7 +4290,7 @@
           "Arsenic"
         ],
         "relevant": true,
-        "gpt3_completion": " 'Arsenic' is a p-Type dopant.\n",
+        "llm_completion": " 'Arsenic' is a p-Type dopant.\n",
         "gpt3_logprobs_numbers": [
           -7.584048e-06,
           -0.00013824523,
@@ -4341,7 +4341,7 @@
           "CdTe"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'CdTe' was doped with 'As'.\n",
+        "llm_completion": " The host 'CdTe' was doped with 'As'.\n",
         "gpt3_logprobs_numbers": [
           -5.912312e-06,
           -5.197998e-06,
@@ -4419,7 +4419,7 @@
           "Te"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'CdTe' was doped with 'As'.\n",
+        "llm_completion": " The host 'CdTe' was doped with 'As'.\n",
         "gpt3_logprobs_numbers": [
           -2.0966954e-06,
           -7.8634315e-05,
@@ -4492,7 +4492,7 @@
         "sentence_text": "The defect structures were investigated by thermoelectric-effect spectroscopy (TEES), and first-principles calculations were used for identifying and assigning the experimentally observed defects.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -4507,7 +4507,7 @@
         "sentence_text": "Measurements revealed activation of As is very low in both As-doped samples with very short lifetimes indicating strong compensation and the presence of significant carrier trapping defects.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " The host 'samples' was doped with 'As'.\n",
+        "llm_completion": " The host 'samples' was doped with 'As'.\n",
         "gpt3_logprobs_numbers": [
           -2.045765e-05,
           -2.033751e-05,
@@ -4564,7 +4564,7 @@
         "sentence_text": "Defect studies suggest two acceptors and one donor level were introduced by As doping with activation energies at ~88 meV, ~293 meV and ~377 meV.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " 'As' is a dopant.\n",
+        "llm_completion": " 'As' is a dopant.\n",
         "gpt3_logprobs_numbers": [
           -7.818713e-06,
           -3.883893e-06,
@@ -4615,7 +4615,7 @@
         "sentence_text": "In particular, the peak shown at ~162 K in the TEES spectra is very prominent in both As-doped samples, indicating a signature of AX-center donors.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " The host 'samples' was doped with 'As'.\n",
+        "llm_completion": " The host 'samples' was doped with 'As'.\n",
         "gpt3_logprobs_numbers": [
           -3.762558e-05,
           -5.0778563e-06,
@@ -4672,7 +4672,7 @@
         "sentence_text": "The AX-centers are believed to be responsible for most of the compensation because of their low formation energy and very prominent peak intensity in TEES spectra.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -4699,7 +4699,7 @@
           "Ho3+"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'calcium tungstate' was doped with 'Yb3+'.\nThe host 'calcium tungstate' was doped with 'Ho3+'.\n",
+        "llm_completion": " The host 'calcium tungstate' was doped with 'Yb3+'.\nThe host 'calcium tungstate' was doped with 'Ho3+'.\n",
         "gpt3_logprobs_numbers": [
           -9.639735e-05,
           -2.1051823e-05,
@@ -4828,7 +4828,7 @@
           "Ca3WO6"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Ca3WO6' was doped with 'Ho3+'.\nThe host 'Ca3WO6' was doped with 'Yb3+'.\n",
+        "llm_completion": " The host 'Ca3WO6' was doped with 'Ho3+'.\nThe host 'Ca3WO6' was doped with 'Yb3+'.\n",
         "gpt3_logprobs_numbers": [
           -4.5494293e-05,
           -6.0395385e-05,
@@ -4953,7 +4953,7 @@
         "sentence_text": "For the investigation of particle size and the surface morphology of the prepared material the field emission scanning electron microscopy have been performed.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -4973,7 +4973,7 @@
           "Yb3+"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'phosphors' was doped with 'Ho3+'.\nThe host 'phosphors' was doped with 'Yb3+'.\n",
+        "llm_completion": " The host 'phosphors' was doped with 'Ho3+'.\nThe host 'phosphors' was doped with 'Yb3+'.\n",
         "gpt3_logprobs_numbers": [
           -3.357061e-05,
           -9.966347e-06,
@@ -5082,7 +5082,7 @@
         "sentence_text": "Up-conversion emission band have been observed in the visible region upon excitation with a 980\u00a0nm laser diode.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5100,7 +5100,7 @@
           "Yb3+"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Ca3WO6' was doped with 'Ho3+'.\nThe host 'Ca3WO6' was doped with 'Yb3+'.\n",
+        "llm_completion": " The host 'Ca3WO6' was doped with 'Ho3+'.\nThe host 'Ca3WO6' was doped with 'Yb3+'.\n",
         "gpt3_logprobs_numbers": [
           -4.2272848e-05,
           -9.2821094e-05,
@@ -5225,7 +5225,7 @@
         "sentence_text": "The study provides deep insights into the understanding of bidirectional energy transfer in UC mechanism, offering the possibility for applications in color displays and anti-counterfeiting techniques.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5250,7 +5250,7 @@
           "Cd x O2"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.00043140285,
           0,
@@ -5303,7 +5303,7 @@
           "TiO2"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'rutile TiO2' was doped with 'cadmium'.\n",
+        "llm_completion": " The host 'rutile TiO2' was doped with 'cadmium'.\n",
         "gpt3_logprobs_numbers": [
           -2.3795494e-05,
           -8.4157e-06,
@@ -5380,7 +5380,7 @@
           "Cd"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5398,7 +5398,7 @@
           "Ti"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5413,7 +5413,7 @@
         "sentence_text": "Therefore, the band gap of the material reduces significantly, making it suitable to act as a better photocatalyst.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5437,7 +5437,7 @@
           "triethylene-glycol dicoumarin-3-carboxylates"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5455,7 +5455,7 @@
           "1H"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5473,7 +5473,7 @@
           "PMMA"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'PMMA' was doped with 'triethylene-glycol dibenzo[5,6]coumarin-3-carboxylate'.\n",
+        "llm_completion": " The host 'PMMA' was doped with 'triethylene-glycol dibenzo[5,6]coumarin-3-carboxylate'.\n",
         "gpt3_logprobs_numbers": [
           -1.6642034e-05,
           -3.0707724e-05,
@@ -5594,7 +5594,7 @@
         "sentence_text": "These compounds exhibit strong blue emission under ultraviolet light excitation.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5613,7 +5613,7 @@
           "benzene"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5628,7 +5628,7 @@
         "sentence_text": "These derivatives have potential possible to explore organic electroluminescent materials.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5643,7 +5643,7 @@
         "sentence_text": "\u00a9 2007 Elsevier B.V.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5658,7 +5658,7 @@
         "sentence_text": "All rights reserved.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5682,7 +5682,7 @@
           "strontium"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Zn5Al' was doped with 'strontium'.\nThe host 'Zn55Al' was doped with 'strontium'.\n",
+        "llm_completion": " The host 'Zn5Al' was doped with 'strontium'.\nThe host 'Zn55Al' was doped with 'strontium'.\n",
         "gpt3_logprobs_numbers": [
           -5.6340414e-05,
           -1.7400124e-06,
@@ -5793,7 +5793,7 @@
           "strontium"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Zn5Al' was doped with 'strontium'.\nThe host 'Zn55Al' was doped with 'strontium'.\n",
+        "llm_completion": " The host 'Zn5Al' was doped with 'strontium'.\nThe host 'Zn55Al' was doped with 'strontium'.\n",
         "gpt3_logprobs_numbers": [
           -4.1320116e-05,
           -6.1516675e-06,
@@ -5903,7 +5903,7 @@
           "Zn55Al"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5922,7 +5922,7 @@
           "strontium"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -5948,7 +5948,7 @@
           "Carbon Nitride"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Graphitic Carbon Nitride' was doped with '2,4-Diaminopyrimidine'.\n",
+        "llm_completion": " The host 'Graphitic Carbon Nitride' was doped with '2,4-Diaminopyrimidine'.\n",
         "gpt3_logprobs_numbers": [
           -5.197998e-06,
           -1.9382902e-05,
@@ -6037,7 +6037,7 @@
         "sentence_text": "Copyright \u00a9 2019 American Chemical Society.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6056,7 +6056,7 @@
           "GCN"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'graphitic carbon nitride' was doped.\n",
+        "llm_completion": " The host 'graphitic carbon nitride' was doped.\n",
         "gpt3_logprobs_numbers": [
           -2.7013197e-05,
           -4.361666e-06,
@@ -6112,7 +6112,7 @@
           "urea"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'GCN' was doped.\n",
+        "llm_completion": " The host 'GCN' was doped.\n",
         "gpt3_logprobs_numbers": [
           -6.2699432e-06,
           -4.361666e-06,
@@ -6165,7 +6165,7 @@
           "DAP"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'GCN' was doped with 'CN'.\n",
+        "llm_completion": " The host 'GCN' was doped with 'CN'.\n",
         "gpt3_logprobs_numbers": [
           -7.937927e-06,
           -1.1159372e-05,
@@ -6224,7 +6224,7 @@
           "hydrogen"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'GCN' was doped.\n",
+        "llm_completion": " The host 'GCN' was doped.\n",
         "gpt3_logprobs_numbers": [
           -1.9382902e-05,
           -1.1991961e-05,
@@ -6282,7 +6282,7 @@
           "pyrimidine"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6299,7 +6299,7 @@
           "Pt"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'GCN' was doped.\n",
+        "llm_completion": " The host 'GCN' was doped.\n",
         "gpt3_logprobs_numbers": [
           -4.2433903e-06,
           -6.5092986e-06,
@@ -6362,7 +6362,7 @@
           "NH4H2PO4"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6388,7 +6388,7 @@
           "Cr"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'KDP' was doped with 'Cr'.\nThe host 'KDP' was doped with 'D'.\n",
+        "llm_completion": " The host 'KDP' was doped with 'Cr'.\nThe host 'KDP' was doped with 'D'.\n",
         "gpt3_logprobs_numbers": [
           -9.012677e-06,
           -1.5327929e-05,
@@ -6481,7 +6481,7 @@
         "sentence_text": "Both the X-rays and H+(0.71MeV),He+(4.6 and 27MeV),N+(16MeV) ion beams were used for irradiation of the crystals studied.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6499,7 +6499,7 @@
           "H+"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6514,7 +6514,7 @@
         "sentence_text": "Considerations of the radiation effects in these crystals under irradiation with the ion beams were made taking into account the results of Monte Carlo simulations using the TRIM computer codes.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6529,7 +6529,7 @@
         "sentence_text": "Using the experimental and theoretical results the paper discusses the similarities and differences of these crystals with respect to radiation hardness and the processes of radiation energy storage.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6554,7 +6554,7 @@
           "Sr2CeO4"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Sr2CeO4' was doped with 'Eu3+'.\n",
+        "llm_completion": " The host 'Sr2CeO4' was doped with 'Eu3+'.\n",
         "gpt3_logprobs_numbers": [
           -6.3900848e-06,
           -9.370307e-06,
@@ -6630,7 +6630,7 @@
           "Eu"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Sr2CeO4' was doped with 'Eu'.\n",
+        "llm_completion": " The host 'Sr2CeO4' was doped with 'Eu'.\n",
         "gpt3_logprobs_numbers": [
           -1.163433e-05,
           -4.0603925e-05,
@@ -6703,7 +6703,7 @@
         "sentence_text": "The emission was achieved by fabricating a thin film electroluminescent device (TFEL) that consisted of a multiple layer heterostructure formed by a top transparent electrode, emitting layer, dielectric sheet and metallic back electrode.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6724,7 +6724,7 @@
           "Sr2CeO4"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Sr2CeO4' was doped with 'Eu'.\n",
+        "llm_completion": " The host 'Sr2CeO4' was doped with 'Eu'.\n",
         "gpt3_logprobs_numbers": [
           -1.1039229e-05,
           -1.4139594e-05,
@@ -6799,7 +6799,7 @@
           "ITO"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6817,7 +6817,7 @@
           "epoxy"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6834,7 +6834,7 @@
           "Eu3+"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6849,7 +6849,7 @@
         "sentence_text": "CIE chromaticity coordinates are x=0.639 and y=0.360.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6864,7 +6864,7 @@
         "sentence_text": "Electro-optical measurements showed a threshold voltage at 150V with the maximum efficiency of \u223c16\u00d710\u22123lm/W at 300V.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6886,7 +6886,7 @@
         "sentence_text": "Effect of the sample work function on alkali metal dosing induced electronic structure change.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6901,7 +6901,7 @@
         "sentence_text": "Alkali metal dosing (AMD) has been widely used as a way to control doping without chemical substitution.",
         "sentence_cems": [],
         "relevant": true,
-        "gpt3_completion": " 'chemical substitution' is a type of 'doping'.\n",
+        "llm_completion": " 'chemical substitution' is a type of 'doping'.\n",
         "gpt3_logprobs_numbers": [
           -0.18138415,
           -0.0021707888,
@@ -6950,7 +6950,7 @@
         "sentence_text": "This technique, in combination with angle resolved photoemission spectroscopy (ARPES), often provides an opportunity to observe unexpected phenomena.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6965,7 +6965,7 @@
         "sentence_text": "However, the amount of transferred charge and the corresponding change in the electronic structure vary significantly depending on the material.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -6984,7 +6984,7 @@
           "NaFeAs"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -0.2736857,
           0,
@@ -7033,7 +7033,7 @@
         "sentence_text": "Electronic structure change upon monolayer of alkali metal dosing and the sample work function were measured by ARPES.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7048,7 +7048,7 @@
         "sentence_text": "Our results show that the degree of electronic structure change is proportional to the difference between the work function of the sample and Mulliken's absolute electronegativity of the dosed alkali metal.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7063,7 +7063,7 @@
         "sentence_text": "This finding provides a possible way to estimate the AMD induced electronic structure change.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7087,7 +7087,7 @@
           "CaF2"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'CaF2' was doped with 'rare earth'.\n",
+        "llm_completion": " The host 'CaF2' was doped with 'rare earth'.\n",
         "gpt3_logprobs_numbers": [
           -1.7119806e-05,
           -1.843017e-05,
@@ -7169,7 +7169,7 @@
           "Yb"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'CaF2' was doped with 'Ce'.\nThe host 'CaF2' was doped with 'Pr'.\nThe host 'CaF2' was doped with 'Sm'.\nThe host 'CaF2' was doped with 'Eu'.\nThe host 'CaF2' was doped with 'Gd'.\nThe host 'CaF2' was doped with 'Tb'.\nThe host 'CaF2' was doped with 'Dy'.\nThe host 'CaF2' was doped with 'Ho'.\nThe host '",
+        "llm_completion": " The host 'CaF2' was doped with 'Ce'.\nThe host 'CaF2' was doped with 'Pr'.\nThe host 'CaF2' was doped with 'Sm'.\nThe host 'CaF2' was doped with 'Eu'.\nThe host 'CaF2' was doped with 'Gd'.\nThe host 'CaF2' was doped with 'Tb'.\nThe host 'CaF2' was doped with 'Dy'.\nThe host 'CaF2' was doped with 'Ho'.\nThe host '",
         "gpt3_logprobs_numbers": [
           -1.9860674e-05,
           -2.200643e-05,
@@ -7480,7 +7480,7 @@
           "lanthanide"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7498,7 +7498,7 @@
           "Yb"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'samples' was doped with 'Ce'.\nThe host 'samples' was doped with 'Yb'.\n",
+        "llm_completion": " The host 'samples' was doped with 'Ce'.\nThe host 'samples' was doped with 'Yb'.\n",
         "gpt3_logprobs_numbers": [
           -0.00035335214,
           -2.2126573e-05,
@@ -7591,7 +7591,7 @@
         "sentence_text": "The magnitudes of the observed values of W and \u03c40 are supported by an analysis of the energetically most probable dipole reorientation mechanism, interstitialcy migration.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7606,7 +7606,7 @@
         "sentence_text": "The vibrational frequencies to be expected for interstitial ions and the entropy of activation are also discussed in terms of the experimentally observed kinetic parameters.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7628,7 +7628,7 @@
         "sentence_text": "Static spin freezing in nav2o5 detected by muon spin relaxation.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7645,7 +7645,7 @@
           "NaV2O5"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7663,7 +7663,7 @@
           "NaxV2O5"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'Na deficient samples NaxV2O5' was doped with 'charge'.\n",
+        "llm_completion": " The host 'Na deficient samples NaxV2O5' was doped with 'charge'.\n",
         "gpt3_logprobs_numbers": [
           -0.00013597934,
           -3.883893e-06,
@@ -7736,7 +7736,7 @@
         "sentence_text": "We discuss a few different scenarios to interpret this spin freezing.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7751,7 +7751,7 @@
         "sentence_text": "1999 \u00a9 The American Physical Society.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7775,7 +7775,7 @@
           "GaAs"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7792,7 +7792,7 @@
           "GaAs"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7810,7 +7810,7 @@
           "Cr"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'samples' was doped with 'Cr'.\nThe host 'samples' was doped with 'Te'.\n",
+        "llm_completion": " The host 'samples' was doped with 'Cr'.\nThe host 'samples' was doped with 'Te'.\n",
         "gpt3_logprobs_numbers": [
           -0.007822671,
           -1.7400124e-06,
@@ -7903,7 +7903,7 @@
         "sentence_text": "The large resonance linewidth of 930 mT is attributed to exchange interactions with randomly distributed recombination partners.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7918,7 +7918,7 @@
         "sentence_text": "\u00a9 1993 The American Physical Society.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -7944,7 +7944,7 @@
           "carbon"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'hierarchical porous carbon' was doped with 'nitrogen'.\nThe host 'hierarchical porous carbon' was doped with 'sulfur'.\n",
+        "llm_completion": " The host 'hierarchical porous carbon' was doped with 'nitrogen'.\nThe host 'hierarchical porous carbon' was doped with 'sulfur'.\n",
         "gpt3_logprobs_numbers": [
           -9.72699e-06,
           -5.675771e-06,
@@ -8069,7 +8069,7 @@
         "sentence_text": "Vastly improving the charge storage capability of supercapacitors without sacrificing their high power density and cycle performance would bring bright application prospect.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8092,7 +8092,7 @@
           "carbon"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'hierarchical porous carbon' was doped with 'nitrogen'.\nThe host 'hierarchical porous carbon' was doped with 'sulfur'.\n",
+        "llm_completion": " The host 'hierarchical porous carbon' was doped with 'nitrogen'.\nThe host 'hierarchical porous carbon' was doped with 'sulfur'.\n",
         "gpt3_logprobs_numbers": [
           -3.201996e-05,
           -9.251094e-06,
@@ -8217,7 +8217,7 @@
         "sentence_text": "A high electrochemical double-layer (EDL) capacitance of 351\u00a0F\u00a0g\u22121 was observed for the reported NSHPC electrodes, and the capacitance remains at 288\u00a0F\u00a0g\u22121 even under a large current density of 20\u00a0A\u00a0g\u22121.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8232,7 +8232,7 @@
         "sentence_text": "Besides the high specific capacitance and outstanding rate capability, symmetrical supercapacitor cell based on the NSHPC electrodes also exhibits an excellent cycling performance with 95.61% capacitance retention after 5000 times charge/discharge cycles.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8251,7 +8251,7 @@
           "KOH"
         ],
         "relevant": true,
-        "gpt3_completion": " 'N' is a dopant.\n'S' is a dopant.\n",
+        "llm_completion": " 'N' is a dopant.\n'S' is a dopant.\n",
         "gpt3_logprobs_numbers": [
           -0.00101106,
           -0.00043844085,
@@ -8326,7 +8326,7 @@
         "sentence_text": "Photodetector with subwavelength spatial resolution.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8341,7 +8341,7 @@
         "sentence_text": "A photodetector operating with subwavelength spatial resolution is presented.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8358,7 +8358,7 @@
           "GaAs"
         ],
         "relevant": true,
-        "gpt3_completion": " The host 'GaAs' was doped.\n",
+        "llm_completion": " The host 'GaAs' was doped.\n",
         "gpt3_logprobs_numbers": [
           -1.8190814e-05,
           -3.883893e-06,
@@ -8409,7 +8409,7 @@
         "sentence_text": "The cleavage plane normal to the interface defines a line detector with high spatial resolution.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8424,7 +8424,7 @@
         "sentence_text": "The actual resolution was tested using a near-field scanning optical microscope.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8441,7 +8441,7 @@
           "Al"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8458,7 +8458,7 @@
           "GaAs"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8473,7 +8473,7 @@
         "sentence_text": "The width of the observed peak in photocurrent is found to be highly asymmetric with respect to the p or n side of the junction.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8490,7 +8490,7 @@
           "p-GaAs"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8505,7 +8505,7 @@
         "sentence_text": "\u00a9 1995 Elsevier Science B.V.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8520,7 +8520,7 @@
         "sentence_text": "All rights reserved.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8545,7 +8545,7 @@
           "fluoride"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8562,7 +8562,7 @@
           "La1\u2212xBaxF3\u2212x"
         ],
         "relevant": true,
-        "gpt3_completion": " There is no doping information.\n",
+        "llm_completion": " There is no doping information.\n",
         "gpt3_logprobs_numbers": [
           -7.9112084e-05,
           0,
@@ -8611,7 +8611,7 @@
         "sentence_text": "The films were characterized by X-ray diffraction (XRD), scanning electron microscopy (SEM), atomic force microscopy (AFM) and electrochemical impedance spectroscopy (EIS).",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8626,7 +8626,7 @@
         "sentence_text": "All the compositions possessed a tysonite-type structure without any detectable impurity; the thickness of the films was 5\u20136\u03bcm.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8645,7 +8645,7 @@
           "BaF2"
         ],
         "relevant": true,
-        "gpt3_completion": " 'BaF2' is a dopant.\n",
+        "llm_completion": " 'BaF2' is a dopant.\n",
         "gpt3_logprobs_numbers": [
           -0.164606,
           -2.4543265e-06,
@@ -8698,7 +8698,7 @@
           "La0.9Ba0.1F2.9"
         ],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8713,7 +8713,7 @@
         "sentence_text": "An ionic conductivity of 8.8\u00d710\u22125S\u00b7cm\u22121 was observed at 170\u00b0C.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {
@@ -8728,7 +8728,7 @@
         "sentence_text": "Apparent activation energy for the ion conduction measured from 60\u00b0C to 170\u00b0C was determined, as well.",
         "sentence_cems": [],
         "relevant": false,
-        "gpt3_completion": null,
+        "llm_completion": null,
         "gpt3_logprobs_numbers": null,
         "gpt3_logprobs_tokens": null,
         "entity_graph_raw": {

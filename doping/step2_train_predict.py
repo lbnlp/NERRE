@@ -559,21 +559,21 @@ def gpt3_infer(
                             break
 
                 # Record predictions, or put None if Error not halted on
-                s_json["gpt3_completion"] = response.text if has_response else None
+                s_json["llm_completion"] = response.text if has_response else None
                 s_json["gpt3_logprobs_numbers"] = response.logprobs.token_logprobs if has_response else None
                 s_json["gpt3_logprobs_tokens"] = response.logprobs.tokens if has_response else None
 
             else:
                 prompt = None
                 s_json["relevant"] = False
-                s_json["gpt3_completion"] = None
+                s_json["llm_completion"] = None
                 s_json["gpt3_logprobs_numbers"] = None
                 s_json["gpt3_logprobs_tokens"] = None
 
             if prompt:
                 jsonl_data.append({
                     "prompt": prompt,
-                    "completion": s_json["gpt3_completion"],
+                    "completion": s_json["llm_completion"],
                 })
 
         gpt3_predictions.append(entry_json)
@@ -604,7 +604,7 @@ def gpt3_decode(inferred_filename, output_filename, fmt="eng"):
 
     for abstract_json in tqdm.tqdm(inferred_samples):
         for sentence_json in abstract_json["doping_sentences"]:
-            ents = decode_entities_from_llm_completion(sentence_json["gpt3_completion"], fmt=fmt)
+            ents = decode_entities_from_llm_completion(sentence_json["llm_completion"], fmt=fmt)
             sentence_json["entity_graph_raw"] = ents
 
     n_decoded = len(inferred_samples)

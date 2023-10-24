@@ -59,33 +59,7 @@ Support was:  {'ents': {'basemats': 60, 'dopants': 76},
 
 GPT-3 Doping-EngExtra
 -------------------
-
-Scoring outputs using 
-        test file: /Users/ardunn/alex/lbl/projects/matscholar/ardunn_text_experiments/nerre_official_provenance_repository/doping/data/test.json
-        pred file: data/inference_decoded_eng.json
-basemats: prec=0.8888888888888888, recall=0.898876404494382, f1=0.8938547486033519
-dopants: prec=0.8441558441558441, recall=0.7738095238095238, f1=0.8074534161490683
-triplets: prec=0.8037383177570093, recall=0.7543859649122807, f1=0.7782805429864253
-      metric         entity     score
-0  precision       basemats  0.888889
-1     recall       basemats  0.898876
-2         f1       basemats  0.893855
-3  precision        dopants  0.844156
-4     recall        dopants  0.773810
-5         f1        dopants  0.807453
-6  precision  link triplets  0.803738
-7     recall  link triplets  0.754386
-8         f1  link triplets  0.778281
-Total sequences was: 77
-Frac. Sequences parsable:  0.987012987012987
-Avg sequence similarity:  0.9446225963140241
-Frac. of sequences exactly correct:  0.5974025974025974
-Support was:  {'ents': {'basemats': 60, 'dopants': 76},
- 'links_ents': 72,
- 'links_words': 114,
- 'words': {'basemats': 111, 'dopants': 110}}
-(nerre_official_venv) ardunn@raijin [doping]: python step3_score.py engextra --pred_file "data/inference_decoded_engextra.json"
-Scoring outputs using 
+Scoring outputs using
         test file: /Users/ardunn/alex/lbl/projects/matscholar/ardunn_text_experiments/nerre_official_provenance_repository/doping/data/test.json
         pred file: data/inference_decoded_engextra.json
 basemats: prec=0.8817204301075269, recall=0.9213483146067416, f1=0.9010989010989011
@@ -219,3 +193,60 @@ Support was:  {'ents': {'basemats': 60, 'dopants': 76, 'doping_modifiers': 7, 'r
            'doping_modifiers': 77,
            'results': 103}}
 
+
+
+Seq2Rel
+--------
+Scoring outputs using
+        test file: /Users/ardunn/alex/lbl/projects/matscholar/ardunn_text_experiments/nerre_official_provenance_repository/doping/data/test.json
+        pred file: data/seq2rel/seq2rel_doping_evaluation_all_lowercase.json
+basemats: prec=0.43103448275862066, recall=0.8426966292134831, f1=0.5703422053231939
+dopants: prec=0.5238095238095238, recall=0.6547619047619048, f1=0.582010582010582
+triplets: prec=0.42073170731707316, recall=0.6052631578947368, f1=0.49640287769784175
+      metric         entity     score
+0  precision       basemats  0.431034
+1     recall       basemats  0.842697
+2         f1       basemats  0.570342
+3  precision        dopants  0.523810
+4     recall        dopants  0.654762
+5         f1        dopants  0.582011
+6  precision  link triplets  0.420732
+7     recall  link triplets  0.605263
+8         f1  link triplets  0.496403
+Total sequences was: 77
+Frac. Sequences parsable:  1.0
+Avg sequence similarity:  0.9140134292492434
+Frac. of sequences exactly correct:  0.33766233766233766
+Support was:  {'ents': {'basemats': 60, 'dopants': 76},
+ 'links_ents': 72,
+ 'links_words': 114,
+ 'words': {'basemats': 111, 'dopants': 110}}
+
+
+
+MatBERT+Proximity
+--------------------
+Scoring outputs using
+        test file: /Users/ardunn/alex/lbl/projects/matscholar/ardunn_text_experiments/nerre_official_provenance_repository/doping/data/test.json
+        pred file: data/matbert-proximity/matbert_predictions_correct_format.json
+basemats: prec=0.620253164556962, recall=0.550561797752809, f1=0.5833333333333334
+dopants: prec=0.5384615384615384, recall=0.5, f1=0.5185185185185185
+triplets: prec=0.3770491803278688, recall=0.40350877192982454, f1=0.3898305084745763
+      metric         entity     score
+0  precision       basemats  0.620253
+1     recall       basemats  0.550562
+2         f1       basemats  0.583333
+3  precision        dopants  0.538462
+4     recall        dopants  0.500000
+5         f1        dopants  0.518519
+6  precision  link triplets  0.377049
+7     recall  link triplets  0.403509
+8         f1  link triplets  0.389831
+Total sequences was: 77
+Frac. Sequences parsable:  1.0
+Avg sequence similarity:  0.6710716880103103
+Frac. of sequences exactly correct:  0.0
+Support was:  {'ents': {'basemats': 60, 'dopants': 76},
+ 'links_ents': 72,
+ 'links_words': 114,
+ 'words': {'basemats': 111, 'dopants': 110}}

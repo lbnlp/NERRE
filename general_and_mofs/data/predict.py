@@ -116,8 +116,8 @@ if __name__ == "__main__":
                         print("Resuming...")
                         break
 
-            gpt3_completion = response.text if has_response else None
-            d["gpt3_completion"] = gpt3_completion.replace(STOP_TOKEN, "").strip()
+            llm_completion = response.text if has_response else None
+            d["llm_completion"] = llm_completion.replace(STOP_TOKEN, "").strip()
             jsonl_data.append(d)
 
         fname = f"mof_results/run_{run}.jsonl"
