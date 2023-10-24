@@ -58,7 +58,7 @@ Support was:  {'ents': {'basemats': 60, 'dopants': 76},
 
 
 GPT-3 Doping-EngExtra
--------------------
+---------------------
 Scoring outputs using
         test file: /Users/ardunn/alex/lbl/projects/matscholar/ardunn_text_experiments/nerre_official_provenance_repository/doping/data/test.json
         pred file: data/inference_decoded_engextra.json

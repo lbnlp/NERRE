@@ -82,9 +82,15 @@ Jaro-Winkler avg similarity: 0.9423860071801728
 And for MOFs, do:
 
 ```bash
-$: python results.py --results_dir data/mof_results --task mofs
+$: python results.py --results_dir data/mof_results --task mof
 ```
 
+And to score the results from Llama-2 benchmark, do:
+
+```bash
+$: python results.py --results_dir data/experiments_general_llama2predictions --task general
+$: python results.py --results_dir data/experiments_mof_llama2predictions --task mof
+```
 
 The help string for the `results.py` script is:
 
