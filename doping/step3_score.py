@@ -73,7 +73,7 @@ def evaluate(gold, test, loud=False, lowercase=False):
                 test_entry["dopants2basemats"] = {}
 
             sentence_text = s["sentence_text"]
-            gold_completion = s["completion"]
+            gold_completion = s.get("completion", "")
 
             if lowercase:
                 # Adjust the sequence-level scoring for seq2rel
