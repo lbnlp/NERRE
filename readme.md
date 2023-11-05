@@ -1,6 +1,6 @@
 # LLM-NERRE  - Structured Data Extraction
 
-> For the publication "*Structured information extraction from scientific text with large language models*" in Nature Communications by John Dagdelen*, Alexander Dunn*, Nicholas Walker, Sanghoon Lee, Andrew S. Rosen, Gerbrand Ceder, Kristin Persson, and Anubhav Jain.
+> For the publication "*Structured information extraction from scientific text with large language models*" in Nature Communications by John Dagdelen*, Alexander Dunn*, Sanghoon Lee, Nicholas Walker, Andrew S. Rosen, Gerbrand Ceder, Kristin A. Persson, and Anubhav Jain.
 > ###### * = Equal contribution
 
 This repository contains code for extracting structured relational data as JSON documents from complex scientific text, with particular application to materials science.
