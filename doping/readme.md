@@ -1,6 +1,6 @@
 # Doping NERRE
 
-Annotating, training, and evaluating the LLM-NERRE doping experiments requires a bit more code as entries are broken down on a sentence-by-sentence basis. This directory contains code for annotation, training with GPT-3, and evaluating on the test set. You may also use these scripts to run full-scale inference experiments with your own models. **Note: The models used in the publication require private API access and therefore cannot be called; you can, however, train your own model (~$5 with the data provided here) and obtain similar results to those shown in the paper.** Inputs and outputs used in the paper are provided for all intermediate steps such that each step can otherwise be reproduced without access to the model.
+Annotating, training, and evaluating the LLM-NERRE doping experiments requires a bit more code as entries are broken down on a sentence-by-sentence basis. This directory contains code for annotation, training with GPT-3, and evaluating on the test set. You may also use these scripts to run full-scale inference experiments with your own models. **Note: The GPT-3 models used in the publication require private API access and therefore cannot be called; you can, however, train your own model (~$5 with the data provided here) and obtain similar results to those shown in the paper.** Inputs and outputs used in the paper are provided for all intermediate steps such that each step can otherwise be reproduced without access to the model.
 
 *You should not use the annotation UI for the doping task, you should use the annotation script below.*
 
@@ -13,7 +13,12 @@ There are 3 scripts:
 2. `step2_train_predict.py`: Train a new model using the annotated data using your schema of choice (Eng, EngExtra, or JSON). Also contains code for inferring entries with GPT-3 using the trained model. All requisite JSONL files are automatically written. Optional sentencewise JSONL files are written as well to facilitate use of this data outside of the code framework here (i.e., directly with openai API.) Optional intermediate files are also written for reproducibility and troubleshooting.
 3. `step3_evaluate.py`: Evaluate the trained model on the test set. Works with all three schemas presented in the publication.
 
+
+The expected score results for each of two models (llama2, gpt3) for each of three schemas (Doping-JSON, Doping-English, DopingExtra-English) as well as MatBERT-Proximity and seq2rel are shown int he `all_doping_results_output_summary.txt` file.
+
 ### For any of the above scripts, pass --help in order to see all available options.
+
+### For llama2 fine tuning, see the supplementary repo: [https://github.com/lbnlp/nerre-llama](https://github.com/lbnlp/nerre-llama). 
 
 ### Included data files
 
@@ -35,7 +40,7 @@ These scripts were tested with python 3.7.3, though they may work with later ver
 ```bash
 $: pip install -r requirements.txt
 ```
-*Note: The LLM used in this work is GPT-3, which is dependent on the OpenAI API. The format of the API may change over time and we do not guarantee the API will continue working as is shown here.*
+*Note: An LLM used in this work is GPT-3, which is dependent on the OpenAI API. The format of the API may change over time and we do not guarantee the API will continue working as is shown here.*
 
 ## Example usage: Train your own model to obtain similar results to those shown in the paper
 
@@ -99,27 +104,35 @@ Decoded 31 samples to file REPO_DIR/doping/data/inference_decoded_eng_2023-06-13
 
 Now evaluate the predicted data compared to the true test set annotations, including sequence accuracy similarity according to Jaro-Winkler using the Eng schema:
 ```bash
-$: python step3_score.py eng --pred_file "data/inference_decoded_eng.json"
+$: python step3_score.py eng --pred_file "data/llama2/inference_decoded_eng.json"
 ```
 
 Output:
 ```text
-Scoring outputs using REPO_DIR/doping/data/test.json and data/inference_decoded_eng_2023-06-13_15.58.18.json
-basemats: prec=0.9512195121951219, recall=0.9512195121951219, f1=0.9512195121951219
-dopants: prec=0.8461538461538461, recall=0.825, f1=0.8354430379746836
-triplets: prec=0.7966101694915254, recall=0.8103448275862069, f1=0.8034188034188032
+Scoring outputs using 
+        test file: /Users/ardunn/ardunn/lbl/nlp/ardunn_text_experiments/nerre_official_provenance_repository/doping/data/test.json
+        pred file: data/llama2/inference_decoded_eng.json
+basemats: prec=0.8383838383838383, recall=0.9325842696629213, f1=0.8829787234042553
+dopants: prec=0.8372093023255814, recall=0.8571428571428571, f1=0.8470588235294118
+triplets: prec=0.7868852459016393, recall=0.8421052631578947, f1=0.8135593220338982
       metric         entity     score
-0  precision       basemats  0.951220
-1     recall       basemats  0.951220
-2         f1       basemats  0.951220
-3  precision        dopants  0.846154
-4     recall        dopants  0.825000
-5         f1        dopants  0.835443
-6  precision  link triplets  0.796610
-7     recall  link triplets  0.810345
-8         f1  link triplets  0.803419
-Avg sequence similarity:  0.9766977321626334
-Frac. of sequences exactly correct:  0.6666666666666666
+0  precision       basemats  0.838384
+1     recall       basemats  0.932584
+2         f1       basemats  0.882979
+3  precision        dopants  0.837209
+4     recall        dopants  0.857143
+5         f1        dopants  0.847059
+6  precision  link triplets  0.786885
+7     recall  link triplets  0.842105
+8         f1  link triplets  0.813559
+Total sequences was: 77
+Frac. Sequences parsable:  1.0
+Avg sequence similarity:  0.9461784105659841
+Frac. of sequences exactly correct:  0.6493506493506493
+Support was:  {'ents': {'basemats': 60, 'dopants': 76},
+ 'links_ents': 72,
+ 'links_words': 114,
+ 'words': {'basemats': 111, 'dopants': 110}}
 ```
 
 *Note: Ensure each step of the train/predict/evaluate pipeline is run using the same schema, otherwise you will not get the correct performance.* 
@@ -154,7 +167,7 @@ optional arguments:
 ```
 
 
-### Training and prediction with LLM (GPT-3)
+### Training and prediction with LLM (GPT-3 only)
 ```text
 $: python step2_train_predict.py --help
 
