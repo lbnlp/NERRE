@@ -1,20 +1,28 @@
 # LLM-NERRE  - Structured Data Extraction
 
 For the publication "*Structured information extraction from scientific text with large language models*" in Nature Communications by John Dagdelen*, Alexander Dunn*, Nicholas Walker, Sanghoon Lee, Andrew S. Rosen, Gerbrand Ceder, Kristin Persson, and Anubhav Jain.
-
-This repository contains code for extracting structured relational data as JSON documents from complex scientific text, with particular application to materials science.
-
-
 ###### * = Equal contribution
 
+This repository contains code for extracting structured relational data as JSON documents from complex scientific text, with particular application to materials science.
+For the Llama-2 fine-tuned models and code, see the supplemetary [nerre-llama](https://github.com/lbnlp/nerre-llama) repo.
+## Contents
 
-**General/MOF JSON models**: 
- - For code reproducing the General-JSON and MOF-JSON models, see the `general_and_mofs` subdirectory.
- - Includes the annotation UI (including optional in-the-loop annotation if you have your own GPT-3 fine tune) for annotating new datasets!
+**General/MOF JSON models** (`general_and_mofs` subdirectory): 
+ - Code reproducing the General-JSON and MOF-JSON models:
+   - Code for fine-tuning GPT-3 models using the data shown in the paper to obtain similar results.
+   - Code for preparing cross-validation splits for all models
+   - Code for scoring results for all models
+   - Initial inputs (annotations), intermediate files (if applicable), and final outputs for results shown in the paper for all models
+   - For Llama-2 fine-tuning code and weights, see the supplementary [nerre-llama](https://github.com/lbnlp/nerre-llama) repo
+ - Includes the annotation UI (including optional in-the-loop annotation if you have your own LLM fine tune) for annotating new datasets!
 
-
-**Doping models**: 
-- For code reproducing the doping models, see the `doping` subdirectory.
+**Doping models** (`doping` subdirectory): 
+- Code for reproducing the Doping models:
+  - Code for fine-tuning GPT-3 models using the data shown in the paper to obtain similar results, for all three schema
+  - Code for preparing train/test splits for all models/schemas
+  - Code for scoring results for all models/schemas
+  - Initial inputs (annotations), intermediate files (incl. decoded entries), and final outputs for results shown in the paper for all models/schemas
+  - For Llama-2 fine-tuning code and weights for all schemas, see the supplementary [nerre-llama](https://github.com/lbnlp/nerre-llama) repo
 - Includes annotation CLI for annotating new doping examples from your own data.
 
 

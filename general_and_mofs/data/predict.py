@@ -11,7 +11,7 @@ import time
 
 halt_on_error = False
 
-experiments_dir = "experiments_mof"
+experiments_dir = "experiments_mof_gpt3"
 
 
 # fold 0: "ddavinci:ft-matscholar:mof-rerun4-2023-07-16-04-25-53"

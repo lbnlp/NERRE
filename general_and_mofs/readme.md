@@ -1,10 +1,10 @@
 # General and MOFs tasks
 
-The code and data in this directory supports the General-JSON and MOF-JSON models presented in the publication. Although we cannot share the private API key used to fine-tune the specific models we use, we provide all training and validation data along with scripts for reproducing our work using your own fine tunes. These scripts can also be used for annotating and executing your own specific text extraction tasks. Typically, a fine-tune with the number of training examples we present (on the order of 100-1,000) will cost about $5-$10 with current OpenAI API pricing (dated Jun 23 2023). 
+The code and data in this directory supports the General and MOF models presented in the publication. Although we cannot share the private API key used to fine-tune the specific GPT-3 models we use, we provide all training and validation data along with scripts for reproducing our work using your own fine tunes. These scripts can also be used for annotating and executing your own specific text extraction tasks. Typically, a fine-tune with the number of training examples we present (on the order of 100-1,000) will cost about $5-$10 with current OpenAI API pricing (dated Jun 23 2023). 
 
 **Note: though we use OpenAI's GPT-3 as the LLM for our NERRE approach in this code, the OpenAI API calls can be replaced in principle with fine-tuning code for any LLM.**
 
-
+Alternatively, see [nerre-llama](https://github.com/lbnlp/nerre-llama) for the Llama-2 weights and code.
 ## Annotating examples
 ### Annotation UI
 See `annotation_ui.ipynb`. This annotation UI will allow you to annotate abstracts. If you already have a model to use for in-the-loop annotation, this UI will allow you to "pre-fill" annotations for increased annotation speed.
@@ -24,24 +24,22 @@ To reproduce results in the study, use:
 - General-JSON: `data/general_materials_information_annotations.jsonl`
 - MOF-JSON: `data/mof_annotations.jsonl`
 
-## Training and prediction
+## Training and prediction (with GPT-3)
 ```
 # Fine-tune a GPT-3 model
 bash eval.sh <experiment_dir> <experiment_name>
 ```
 
-After the fine tune has completed, you can predict using the openai API (thru python) on your own examples. See `$: openai --help` and/or the python OpenAI API documentation for more help.
+After the fine tune has completed, you can predict using the openai API (thru python) or Llama-2 on your own examples. For GPT-3, see `$: openai --help` and/or the python OpenAI API documentation for more help. For Llama-2, see the [nerre-llama](https://github.com/lbnlp/nerre-llama) repo.
 
 Alternatively, to reproduce results from the study with your own model using the same data as the study, use the test sets given in the `data` directory as input to a fine-tuned model.
 
 ## Results
 
-The `results.py` script scores results jsonl files previously predicted by five-fold cross validation. The output of your training and prediction should create files called `run_i.jsonl` where `i` is 0, 1, 2, 3, or 4. Each line entry should be a 2-key dictionary where `gpt3_completion` values are what the model output and the `completion` values are the human annotations.
+The `results.py` script scores results jsonl files previously predicted by five-fold cross validation. The output of your training and prediction should create files called `run_i.jsonl` where `i` is 0, 1, 2, 3, or 4. Each line entry should be a 2-key dictionary where `llm_completion` values are what the model output and the `completion` values are the human annotations.
 
 
-For your convenience, we have included the output of the fine-tuned models presented in the publication in compatible format for each of the 5 validation sets in the following directories:
-* `data/general_results`
-* `data/mof_results`
+For your convenience, we have included the output of the fine-tuned models presented in the publication in compatible format for each of the 5 validation sets in the directories `./data/predictions*` with a folder for each model (gpt3, llama2) and task (general, mof).
 
 
 To evaluate a set of results (e.g., those presented in the paper), simply run:
@@ -53,7 +51,7 @@ $: python results.py --results_dir <path to results directory> --task <name of t
 So to score the results of the General-JSON model presented in the paper, do:
 
 ```bash
-$: python results.py --results_dir data/general_results --task general
+$: python results.py --results_dir data/predictions_general_gpt3 --task general
 ```
 
 The output will look like:
@@ -82,14 +80,14 @@ Jaro-Winkler avg similarity: 0.9423860071801728
 And for MOFs, do:
 
 ```bash
-$: python results.py --results_dir data/mof_results --task mof
+$: python results.py --results_dir data/predictions_mof_gpt3 --task mof
 ```
 
 And to score the results from Llama-2 benchmark, do:
 
 ```bash
-$: python results.py --results_dir data/experiments_general_llama2predictions --task general
-$: python results.py --results_dir data/experiments_mof_llama2predictions --task mof
+$: python results.py --results_dir data/predictions_general_llama2 --task general
+$: python results.py --results_dir data/predictions_mof_llama2 --task mof
 ```
 
 The help string for the `results.py` script is:

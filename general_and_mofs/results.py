@@ -103,7 +103,7 @@ def ent_json_to_word_basis_sets(ent_json, return_empty=False):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--results_dir", type=str, default="general_results")
+    parser.add_argument("--results_dir", type=str, default="predictions_general_gpt3")
     # must be general or mof
     parser.add_argument("--task", type=str, default="general", choices=["general", "mof"], help="Which schema is being used")
 
@@ -165,7 +165,7 @@ if __name__ == "__main__":
 
         for ie, sample in tqdm.tqdm(enumerate(run)):
             gold_string = sample["completion"].replace("\n\nEND\n\n", "").strip()
-            test_string = sample["gpt3_completion"].replace("\n\nEND\n\n", "").replace('\\', '').strip()
+            test_string = sample["llm_completion"].replace("\n\nEND\n\n", "").replace('\\', '').strip()
 
             gold_json = json.loads(gold_string)
             prompt = sample["prompt"].replace("\n\n###\n\n", "").strip()
@@ -177,7 +177,7 @@ if __name__ == "__main__":
             test_json = {}
             was_unparsable = False
             try:
-                test_json = sample["gpt3_completion"]
+                test_json = sample["llm_completion"]
                 if isinstance(test_json, str):
                     try:
                         test_json = json.loads(test_json)
