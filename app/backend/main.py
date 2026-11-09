@@ -55,12 +55,13 @@ class UploadLimitMiddleware:
 
 app.add_middleware(UploadLimitMiddleware)
 _extractor = None
-_model_lock = threading.Lock()
+_loading_lock = threading.Lock()
+_generation_lock = threading.Lock()
 
 
 def get_extractor():
     global _extractor
-    with _model_lock:
+    with _loading_lock:
         if _extractor is None:
             if not (MODEL_PATH / "config.json").is_file():
                 raise HTTPException(503, "No fine-tuned model found. Run the training command in the README first.")
@@ -118,7 +119,7 @@ def extract(file: UploadFile = File(...)):
     model = get_extractor()
     results = []
     # Model generation is serialized to avoid concurrent CPU/memory spikes.
-    with _model_lock:
+    with _generation_lock:
         for sentence in sentences:
             try:
                 result = model.extract(sentence)

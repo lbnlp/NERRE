@@ -8,10 +8,15 @@ from pathlib import Path
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from app.backend.extractor import DEFAULT_MODEL, ROOT, Extractor
+from app.backend.extractor import DEFAULT_MODEL, ROOT, Extractor, KEYS, normalize_prediction
 
 
 def graph_sets(graph):
+    """Compare unique names and named links, collapsing duplicate entity names.
+
+    Counts and exact_graph_matches ignore entity multiplicity and arbitrary IDs.
+    Entity strings are compared exactly, including their whitespace.
+    """
     bases, dopants, links = (graph[key] for key in ('basemats', 'dopants', 'dopants2basemats'))
     return {
         'basemats': set(bases.values()),
@@ -35,11 +40,17 @@ def main():
         examples = random.Random(args.seed).sample(examples, min(args.limit, len(examples)))
     if not examples:
         raise ValueError('No relevant evaluation sentences')
+    gold_graphs = []
+    for index, item in enumerate(examples, 1):
+        try:
+            graph = normalize_prediction({key: item.get(key) for key in KEYS})
+        except ValueError as exc:
+            raise ValueError(f"Invalid gold graph for sentence {index}: {exc}") from exc
+        gold_graphs.append(graph_sets(graph))
     model = Extractor(args.model)
     counts = {key: {'tp': 0, 'predicted': 0, 'gold': 0} for key in ('basemats', 'dopants', 'links')}
     valid = exact = 0
-    for item in examples:
-        gold = graph_sets(item)
+    for item, gold in zip(examples, gold_graphs):
         try:
             predicted = graph_sets(model.extract(item['sentence_text']))
             valid += 1
