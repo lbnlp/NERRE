@@ -159,3 +159,5 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+# Local fine-tuned model checkpoints
+/models/
