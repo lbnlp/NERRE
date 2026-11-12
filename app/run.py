@@ -5,7 +5,7 @@ import subprocess
 import sys
 import time
 from urllib.error import URLError
-from urllib.request import urlopen
+from urllib.request import ProxyHandler, build_opener
 
 from app.backend.extractor import ROOT
 
@@ -25,12 +25,13 @@ def main():
             cwd=ROOT, env={**os.environ, 'OMP_NUM_THREADS': os.environ.get('OMP_NUM_THREADS', '4')},
         )
         processes.append(backend)
+        readiness_opener = build_opener(ProxyHandler({}))
         deadline = time.monotonic() + 30
         while True:
             if backend.poll() is not None:
                 raise RuntimeError('Extraction backend exited during startup. See the logs above.')
             try:
-                with urlopen('http://127.0.0.1:8000/api/status', timeout=1) as response:
+                with readiness_opener.open('http://127.0.0.1:8000/api/status', timeout=1) as response:
                     if response.status == 200:
                         break
             except (URLError, TimeoutError):
