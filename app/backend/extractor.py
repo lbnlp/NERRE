@@ -70,13 +70,26 @@ def split_sentences(text):
     return sentences
 
 
+def load_seq2seq_model(model_path, **kwargs):
+    """Preserve FLAN-T5's separate input/output embeddings under Transformers 5."""
+    from transformers import AutoModelForSeq2SeqLM
+    model = AutoModelForSeq2SeqLM.from_pretrained(model_path, **kwargs)
+    # Transformers 5 forces T5 tying on config load, including FLAN checkpoints
+    # whose original tie_word_embeddings=False is retained as output scaling=False.
+    # Restore it after loading so encoder/decoder embeddings are loaded as shared,
+    # while a later vocabulary resize preserves the separate language-model head.
+    if model.config.model_type == "t5" and not model.config.scale_decoder_outputs:
+        model.config.tie_word_embeddings = False
+    return model
+
+
 class Extractor:
     def __init__(self, model_path):
         import torch
-        from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+        from transformers import AutoTokenizer
         self.torch = torch
         self.tokenizer = AutoTokenizer.from_pretrained(str(model_path), local_files_only=True)
-        self.model = AutoModelForSeq2SeqLM.from_pretrained(str(model_path), local_files_only=True)
+        self.model = load_seq2seq_model(str(model_path), local_files_only=True)
         self.model.eval()
 
     def extract(self, sentence):

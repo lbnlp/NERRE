@@ -32,7 +32,21 @@ Training downloads `google/flan-t5-small` and saves the checkpoint to `models/do
 
 ## Run
 
-Start the backend from the repository root:
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:c43e4488b2e1d870a0aa7002f5d474910ff50a8aa406fbd4a362b2592ae8d389 -->
+
+Start both services from the repository root (recommended):
+
+```bash
+.venv/bin/python -m app.run
+```
+
+This command waits for the backend, then starts the frontend on port 8501. Keep the command running while uploading and extracting. Stopping it stops both services.
+
+To run each service separately, start the backend from the repository root:
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 ```bash
 . .venv/bin/activate

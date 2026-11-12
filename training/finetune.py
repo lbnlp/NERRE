@@ -9,7 +9,7 @@ from pathlib import Path
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from app.backend.extractor import ROOT, DEFAULT_MODEL, MAX_INPUT_TOKENS, MAX_OUTPUT_TOKENS, normalize_prediction, decode_output
+from app.backend.extractor import ROOT, DEFAULT_MODEL, MAX_INPUT_TOKENS, MAX_OUTPUT_TOKENS, normalize_prediction, decode_output, load_seq2seq_model
 
 
 def read_examples(path):
@@ -61,7 +61,7 @@ def main():
         parser.error("output already exists; choose a new directory or remove the old checkpoint")
     import torch
     from torch.utils.data import DataLoader
-    from transformers import AddedToken, AutoModelForSeq2SeqLM, AutoTokenizer
+    from transformers import AddedToken, AutoTokenizer
 
     random.seed(args.seed)
     torch.manual_seed(args.seed)
@@ -74,7 +74,7 @@ def main():
     characters = sorted(set(''.join(prompt + target for prompt, target in examples)))
     missing = [char for char in characters if tokenizer.unk_token_id in tokenizer(char, add_special_tokens=False)['input_ids']]
     tokenizer.add_tokens([AddedToken(char, normalized=False) for char in missing])
-    model = AutoModelForSeq2SeqLM.from_pretrained(args.base_model).to(device)
+    model = load_seq2seq_model(args.base_model).to(device)
     model.resize_token_embeddings(len(tokenizer))
     encoded = []
     for prompt, target in examples:
